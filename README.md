@@ -17,8 +17,8 @@ Hadoop-3.2.0 image based on hjben/centos8-systemd:latest
 - Also add the subnet network information.
 - Repeat running the command until the number of slave is satisfied.
 - Command to run slave container is below.
-  - docker run -d --privileged --name {slave_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup --network {network_name} --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop3-centos:3.2.0 /bin/bash -c "init"
-  - eg. docker run -d --privileged --name slave1 -v /sys/fs/cgroup:/sys/fs/cgroup --network hadoop-cluster --ip 10.0.2.3 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hadoop3-centos:3.2.0 /bin/bash -c "init"
+  - docker run -d --privileged --name {slave_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup --network {network_name} --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop3-centos:3.2.0
+  - eg. docker run -d --privileged --name slave1 -v /sys/fs/cgroup:/sys/fs/cgroup --network hadoop-cluster --ip 10.0.2.3 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hadoop3-centos:3.2.0
 - Command Description
   - -d: Run with daemon (background) mode
   - --name {slave_container_name}: Set container name to {slave_container_name}
@@ -26,13 +26,12 @@ Hadoop-3.2.0 image based on hjben/centos8-systemd:latest
   - --network {network_name}: Add the container into subnet network, named by {network_name}
   - --ip {ip}: Set container static ip to {ip}
   - --add-host={host}:{ip}: Add host information to /etc/hosts
-  - /bin/bash -c "init": Run systemd init command when the container started
 
 #### 4. Run master node container
 - When you create master, add network informations at the master container, like slave container.
 - Command to run master container is below.
-  - docker run -d --privileged --name {master_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup --network {network_name} -p {port_for_cluster_manager}:8088 --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop3-centos:3.2.0 /bin/bash -c "init"
-  - eg. docker run -d --privileged --name master -v /sys/fs/cgroup:/sys/fs/cgroup --network hadoop-cluster -p 12345:8088 --ip 10.0.2.2 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hjben/hadoop3-centos:3.2.0 /bin/bash -c "init"
+  - docker run -d --privileged --name {master_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup --network {network_name} -p {port_for_cluster_manager}:8088 --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop3-centos:3.2.0
+  - eg. docker run -d --privileged --name master -v /sys/fs/cgroup:/sys/fs/cgroup --network hadoop-cluster -p 12345:8088 --ip 10.0.2.2 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hjben/hadoop3-centos:3.2.0
 - Command Description
   - -d: Run with daemon (background) mode
   - --name {master_container_name}: Set container name to {master_container_name}
@@ -41,7 +40,6 @@ Hadoop-3.2.0 image based on hjben/centos8-systemd:latest
   - -p {port_for_cluster_manager}:8088: Expose the port for cluster manager as {port_for_cluster_manager}, and the port is to be forwarded to 8088 in container
   - --ip {ip}: Set container static ip to {ip}
   - --add-host={host}:{ip}: Add host information to /etc/hosts
-  - /bin/bash -c "init": Run systemd init command when the container started
 
 #### 5. Revise workers information
 - Before starting the hadoop service, workers information in containers must be revised.
