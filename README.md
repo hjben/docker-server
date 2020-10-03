@@ -52,7 +52,7 @@ Hadoop-3.2.0 image based on hjben/centos8-systemd:latest
   - vi $HADOOP_HOME/etc/hadoop/workers
 
 #### 6. Start Hadoop service
-- In master container shell, run the command "/start-all.sh". then the Hadoop service will be started.
+- In master container shell, run the command "/start-all.sh". Then the Hadoop service will be started.
 - If you're in host shell, command below may be work for you.
   - docker exec {master_container_name} /bin/bash -c "/start-all.sh"
   - eg. docker exec master /bin/bash -c "/start-all.sh"
