@@ -1,6 +1,6 @@
 # hadoop3-centos
 ### Introduction
-Hadoop-3.2.0 image based on hjben/centos8-systemd:latest
+Hadoop3 image based on hjben/centos8-systemd:latest
 
 ### Usage
 #### 1. Pull image
