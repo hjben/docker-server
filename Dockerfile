@@ -42,10 +42,10 @@ ADD workers $HADOOP_HOME/etc/hadoop/workers
 
 ADD ssh_config /root/.ssh/config
 ADD start-all.sh start-all.sh
+RUN chmod 755 start-all.sh
 
 EXPOSE 50010 50020 50070 50075 50090 8020 9000
 EXPOSE 10020 19888
 EXPOSE 8088 9870 9864 19888 8042 8888 8088
 
-CMD bash chmod 755 start-all.sh
 CMD ["/usr/sbin/init"]
