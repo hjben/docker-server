@@ -43,6 +43,7 @@ ADD workers $HADOOP_HOME/etc/hadoop/workers
 ADD ssh_config /root/.ssh/config
 ADD start-all.sh start-all.sh
 RUN chmod 755 start-all.sh
+RUN mkdir $HADOOP_HOME/logs
 
 EXPOSE 50010 50020 50070 50075 50090 8020 9000
 EXPOSE 10020 19888
