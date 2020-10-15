@@ -1,0 +1,77 @@
+version: '2'
+services:
+  master:
+    image: hjben/hadoop3-centos:3.2.0
+    hostname: master
+    container_name: master
+    privileged: true
+    ports:
+      - 12345:8088
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /tmp/hadoop:/usr/local/hadoop
+      - /tmp/hadoop_logs/logs:/opt/hadoop/logs
+    networks:
+      hadoop-cluster:
+        ipv4_address: 10.0.2.2
+    extra_hosts:
+      - "master:10.0.2.2"
+      - "slave1:10.0.2.3"
+      - "slave2:10.0.2.4"
+      - "slave3:10.0.2.5"
+    depends_on:
+      - slave1
+      - slave2
+      - slave3
+  slave1:
+    image: hjben/hadoop3-centos:3.2.0
+    hostname: slave1
+    container_name: slave1
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+    networks:
+      hadoop-cluster:
+        ipv4_address: 10.0.2.3
+    extra_hosts:
+      - "master:10.0.2.2"
+      - "slave1:10.0.2.3"
+      - "slave2:10.0.2.4"
+      - "slave3:10.0.2.5"
+  slave2:
+    image: hjben/hadoop3-centos:3.2.0
+    hostname: slave2
+    container_name: slave2
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+    networks:
+      hadoop-cluster:
+        ipv4_address: 10.0.2.4
+    extra_hosts:
+      - "master:10.0.2.2"
+      - "slave1:10.0.2.3"
+      - "slave2:10.0.2.4"
+      - "slave3:10.0.2.5"
+  slave3:
+    image: hjben/hadoop3-centos:3.2.0
+    hostname: slave3
+    container_name: slave3
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+    networks:
+      hadoop-cluster:
+        ipv4_address: 10.0.2.5
+    extra_hosts:
+      - "master:10.0.2.2"
+      - "slave1:10.0.2.3"
+      - "slave2:10.0.2.4"
+      - "slave3:10.0.2.5"
+
+networks:
+ hadoop-cluster:
+  ipam:
+   driver: default
+   config:
+   - subnet: 10.0.2.0/24
