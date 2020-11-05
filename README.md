@@ -17,12 +17,13 @@ Hadoop3 image based on hjben/centos8-systemd:latest
 - Also add the subnet network information.
 - Repeat running the command until the number of slave is satisfied.
 - Command to run slave container is below.
-  - docker run -d --privileged --name {slave_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup --network {network_name} --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop3-centos:3.2.0
-  - eg. docker run -d --privileged --name slave1 -v /sys/fs/cgroup:/sys/fs/cgroup --network hadoop-cluster --ip 10.0.2.3 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hadoop3-centos:3.2.0
+  - docker run -d --privileged --name {slave_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup -v /tmp/hadoop:{host_directory_for_hdfs} -v /tmp/hadoop_logs/logs:{host_directory_for_hadoop_log} --network {network_name} --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop3-centos:3.2.0
+  - eg. docker run -d --privileged --name slave1 -v /sys/fs/cgroup:/sys/fs/cgroup -v /tmp/hadoop:/usr/local/hadoop -v /tmp/hadoop_logs/logs:/opt/hadoop/logs --network hadoop-cluster --ip 10.0.2.3 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hadoop3-centos:3.2.0
 - Command Description
   - -d: Run with daemon (background) mode
   - --name {slave_container_name}: Set container name to {slave_container_name}
   - -v /sys/fs/cgroup:/sys/fs/cgroup: Share the disk volume between host and container, to access host cgroup from the container
+  - -v {container_directory}:{host_directory}: Mount the disk volume from container to host, then {container_directory} and {host_directory} will be synchronized
   - --network {network_name}: Add the container into subnet network, named by {network_name}
   - --ip {ip}: Set container static ip to {ip}
   - --add-host={host}:{ip}: Add host information to /etc/hosts
@@ -51,9 +52,11 @@ Hadoop3 image based on hjben/centos8-systemd:latest
 
 #### 6. Start Hadoop service
 - In master container shell, run the command "/start-all.sh". Then the Hadoop service will be started.
-- If you're in host shell, command below may be work for you.
+- If you're in host shell and not in container shell, command below may be work for you.
   - docker exec {master_container_name} /bin/bash -c "/start-all.sh"
   - eg. docker exec master /bin/bash -c "/start-all.sh"
+- If you stoped the cluster before and want to restart cluster service, run the command "/restart-all.sh".
+- "/start-all.sh" contains some linux command to format and clean HDFS. 
   
 #### 7. Access to container BASH shell (With Another CLI)
 - You can access to the container by typing "docker exec" command.
