@@ -71,4 +71,25 @@ Hadoop3 image based on hjben/centos8-systemd:latest
   - yarn jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.0.jar pi 2 5
 - You can access to cluster manager web page on: http://localhost:{port_for_cluster_manager}
 
-#### 9. Enjoy your Hadoop cluster!
+### Usage (with docker-compose)
+If your machine have docker-compose, you may use the docker-compose.yml file.
+Using docker-compose.yml, hadoop container will be automatically set with 1 master and 3 slaves.
+
+#### 1. Docker-compose service up
+- Set your current directory to where the docker-compose.yml placed.
+- Then, all preparations are done. Just run the command below.
+  - docker-compose up -d
+- You can start the hadoop service with the command.
+  - docker exec master /bin/bash -c "/start-all.sh" or
+  - docker exec master /bin/bash -c "/restart-all.sh" (use this in case of re-starting)
+  
+#### 2. Docker-compose service stop
+- If you want to stop the hadoop cluster, just run the command below with the current directory be set to where the docker-compose.yml placed.
+  - docker-compose stop
+- The hadoop containers are just stopped, so you can start the containers anytime with "start" command.
+  - docker-compose start
+  
+#### 3. Docker-compose service down 
+- Stop command will stop all hadoop containers, but not remove. If you're planning to delete the containers, too, use the 'down' command.
+  - docker-compose down
+  
