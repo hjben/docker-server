@@ -39,7 +39,7 @@ Hadoop3 image based on hjben/centos8-systemd:latest
   - --name {master_container_name}: Set container name to {master_container_name}
   - -v /sys/fs/cgroup:/sys/fs/cgroup: Share the disk volume between host and container, to access host cgroup from the container
   - -v /tmp/hadoop:{host_directory_for_hdfs}: Share the disk volume between host and container, to save hdfs system file on {host_directory_for_hdfs} for backup
-  - -v /tmp/hadoop_logs/logs:{host_directory_for_hadoop_log}: Share the disk volume between host and container, to save hadoop logs on 
+  - -v /tmp/hadoop_logs/logs:{host_directory_for_hadoop_log}: Share the disk volume between host and container, to save hadoop logs on {host_directory_for_hadoop_log}
   - --network {network_name}: Add the container into subnet network, named by {network_name}
   - -p {port_for_cluster_manager}:8088: Expose the port for cluster manager as {port_for_cluster_manager}, and the port is to be forwarded to 8088 in container
   - --ip {ip}: Set container static ip to {ip}
