@@ -72,8 +72,7 @@ Hadoop3 image based on hjben/centos8-systemd:latest
 - You can access to cluster manager web page on: http://localhost:{port_for_cluster_manager}
 
 ### Usage (with docker-compose)
-If your machine have docker-compose, you may use the docker-compose.yml file.
-Using docker-compose.yml, hadoop container will be automatically set with 1 master and 3 slaves.
+If your machine has docker-compose, you may use the docker-compose.yml file. Using docker-compose.yml, hadoop container will be automatically set with 1 master and 3 slaves.
 
 #### 1. Docker-compose service up
 - Set your current directory to where the docker-compose.yml placed.
