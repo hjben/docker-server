@@ -4,12 +4,12 @@ MAINTAINER hjben <hj.ben.kim@gmail.com>
 ENV HADOOP_HOME /opt/hadoop
 ENV JAVA_HOME /usr/lib/jvm/jre-1.8.0-openjdk
 
-RUN yum install -y openssh-server openssh-clients openssh-askpass
-RUN yum install -y rsync
-RUN yum install -y vim
-RUN yum install -y net-tools
-RUN yum install -y java-1.8.0-openjdk
-RUN yum install -y wget
+RUN dnf install -y openssh-server openssh-clients openssh-askpass
+RUN dnf install -y rsync
+RUN dnf install -y vim
+RUN dnf install -y net-tools
+RUN dnf install -y java-1.8.0-openjdk
+RUN dnf install -y wget
 
 RUN if [ ! -e /usr/bin/python ]; then ln -s /usr/bin/python2.7 /usr/bin/python; fi
 
