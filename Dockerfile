@@ -2,7 +2,7 @@ FROM hjben/centos8-systemd:latest
 MAINTAINER hjben <hj.ben.kim@gmail.com>
 
 ENV HADOOP_HOME /opt/hadoop
-ENV JAVA_HOME /usr/lib/jvm/jre-1.8.0-openjdk-1.8.0.265.b01-0.el8_2.x86_64
+ENV JAVA_HOME /usr/lib/jvm/jre-1.8.0-openjdk
 
 RUN yum install -y openssh-server openssh-clients openssh-askpass
 RUN yum install -y rsync
