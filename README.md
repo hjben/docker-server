@@ -94,4 +94,3 @@ If your machine has docker-compose, you may use the docker-compose.yml file. Usi
 #### 3. Docker-compose service down 
 - Stop command will stop all hadoop containers, but not remove. If you're planning to delete the containers, too, use the 'down' command.
   - docker-compose down
-  
