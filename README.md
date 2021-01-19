@@ -1,4 +1,4 @@
-# hadoop-centos
+# hadoop
 ### Introduction
 Hadoop image based on hjben/centos-systemd:latest
 
@@ -6,8 +6,8 @@ Hadoop image based on hjben/centos-systemd:latest
 #### 1. Pull image
 - Pull docker image from the DockerHub, or build the image with Dockerfile.
 - Docker image tag is related to the version of hadoop.
-  - docker pull hjben/hadoop-centos:{hadoop_version}
-  - eg. docker pull hjben/hadoop-centos:3.2.0
+  - docker pull hjben/hadoop:{hadoop_version}
+  - eg. docker pull hjben/hadoop:3.2.0
 
 #### 2. Create docker subnet
 - Create subnet network for hadoop cluster.
@@ -34,8 +34,8 @@ Hadoop image based on hjben/centos-systemd:latest
 - When you create master, add network informations at the master container, like slave container.
 - Some volume mount option added for backup and logging.
 - Command to run master container is below.
-  - docker run -d --privileged --name {master_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup  -v /tmp/hadoop:{host_directory_for_hdfs} -v /tmp/hadoop_logs/logs:{host_directory_for_hadoop_log} --network {network_name} -p {port_for_cluster_manager}:8088 --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop-centos:{hadoop_version}
-  - eg. docker run -d --privileged --name master -v /sys/fs/cgroup:/sys/fs/cgroup --network hadoop-cluster -p 12345:8088 --ip 10.0.2.2 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hjben/hadoop-centos:3.2.0
+  - docker run -d --privileged --name {master_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup  -v /tmp/hadoop:{host_directory_for_hdfs} -v /tmp/hadoop_logs/logs:{host_directory_for_hadoop_log} --network {network_name} -p {port_for_cluster_manager}:8088 --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop:{hadoop_version}
+  - eg. docker run -d --privileged --name master -v /sys/fs/cgroup:/sys/fs/cgroup --network hadoop-cluster -p 12345:8088 --ip 10.0.2.2 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hjben/hadoop:3.2.0
 - Command Description
   - -d: Run with daemon (background) mode
   - --name {master_container_name}: Set container name to {master_container_name}
