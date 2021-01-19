@@ -4,8 +4,10 @@ Hadoop image based on hjben/centos-systemd:latest
 
 ### Usage
 #### 1. Pull image
-- Pull latest docker image from the DockerHub, or build the image with Dockerfile.
-  - docker pull hjben/hadoop-centos:latest
+- Pull docker image from the DockerHub, or build the image with Dockerfile.
+- Docker image tag is related to the version of hadoop.
+  - docker pull hjben/hadoop-centos:{hadoop_version}
+  - docker pull hjben/hadoop-centos:3.2.0
 
 #### 2. Create docker subnet
 - Create subnet network for hadoop cluster.
