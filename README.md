@@ -5,7 +5,7 @@ Hadoop image based on hjben/centos-systemd:latest
 ### Usage
 #### 1. Pull image
 - Pull latest docker image from the DockerHub, or build the image with Dockerfile.
-  - docker pull hjben/hadoop-centos:3.2.0
+  - docker pull hjben/hadoop-centos:latest
 
 #### 2. Create docker subnet
 - Create subnet network for hadoop cluster.
@@ -17,8 +17,8 @@ Hadoop image based on hjben/centos-systemd:latest
 - Also add the subnet network information.
 - Repeat running the command until the number of slave is satisfied.
 - Command to run slave container is below.
-  - docker run -d --privileged --name {slave_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup --network {network_name} --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop3-centos:3.2.0
-  - eg. docker run -d --privileged --name slave1 -v /sys/fs/cgroup:/sys/fs/cgroup -v /tmp/hadoop:/usr/local/hadoop -v /tmp/hadoop_logs/logs:/opt/hadoop/logs --network hadoop-cluster --ip 10.0.2.3 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hadoop-centos:3.2.0
+  - docker run -d --privileged --name {slave_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup --network {network_name} --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop3-centos:latest
+  - eg. docker run -d --privileged --name slave1 -v /sys/fs/cgroup:/sys/fs/cgroup -v /tmp/hadoop:/usr/local/hadoop -v /tmp/hadoop_logs/logs:/opt/hadoop/logs --network hadoop-cluster --ip 10.0.2.3 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hadoop-centos:latest
 - Command Description
   - -d: Run with daemon (background) mode
   - --name {slave_container_name}: Set container name to {slave_container_name}
@@ -32,8 +32,8 @@ Hadoop image based on hjben/centos-systemd:latest
 - When you create master, add network informations at the master container, like slave container.
 - Some volume mount option added for backup and logging.
 - Command to run master container is below.
-  - docker run -d --privileged --name {master_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup  -v /tmp/hadoop:{host_directory_for_hdfs} -v /tmp/hadoop_logs/logs:{host_directory_for_hadoop_log} --network {network_name} -p {port_for_cluster_manager}:8088 --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop-centos:3.2.0
-  - eg. docker run -d --privileged --name master -v /sys/fs/cgroup:/sys/fs/cgroup --network hadoop-cluster -p 12345:8088 --ip 10.0.2.2 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hjben/hadoop-centos:3.2.0
+  - docker run -d --privileged --name {master_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup  -v /tmp/hadoop:{host_directory_for_hdfs} -v /tmp/hadoop_logs/logs:{host_directory_for_hadoop_log} --network {network_name} -p {port_for_cluster_manager}:8088 --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop-centos:latest
+  - eg. docker run -d --privileged --name master -v /sys/fs/cgroup:/sys/fs/cgroup --network hadoop-cluster -p 12345:8088 --ip 10.0.2.2 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hjben/hadoop-centos:latest
 - Command Description
   - -d: Run with daemon (background) mode
   - --name {master_container_name}: Set container name to {master_container_name}
@@ -68,7 +68,8 @@ Hadoop image based on hjben/centos-systemd:latest
   
 #### 8. Hadoop service test
 - Hadoop sample job is in the master container, you can execute the job with the command below in the container shell
-  - yarn jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.0.jar pi 2 5
+  - yarn jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-{hadoop_version}.jar pi 2 5
+  - eg. yarn jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.0.jar pi 2 5
 - You can access to cluster manager web page on: http://localhost:{port_for_cluster_manager}
 
 ### Usage (with docker-compose)
