@@ -1,7 +1,7 @@
 version: '1'
 services:
   master:
-    image: hjben/hadoop-centos:3.2.0
+    image: hjben/hadoop:3.2.0
     hostname: master
     container_name: master
     privileged: true
@@ -24,7 +24,7 @@ services:
       - slave2
       - slave3
   slave1:
-    image: hjben/hadoop-centos:3.2.0
+    image: hjben/hadoop:3.2.0
     hostname: slave1
     container_name: slave1
     privileged: true
@@ -39,7 +39,7 @@ services:
       - "slave2:10.0.2.4"
       - "slave3:10.0.2.5"
   slave2:
-    image: hjben/hadoop-centos:3.2.0
+    image: hjben/hadoop:3.2.0
     hostname: slave2
     container_name: slave2
     privileged: true
@@ -54,7 +54,7 @@ services:
       - "slave2:10.0.2.4"
       - "slave3:10.0.2.5"
   slave3:
-    image: hjben/hadoop-centos:3.2.0
+    image: hjben/hadoop:3.2.0
     hostname: slave3
     container_name: slave3
     privileged: true
