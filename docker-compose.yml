@@ -39,7 +39,7 @@ services:
       - "slave2:10.0.2.4"
       - "slave3:10.0.2.5"
   slave2:
-    image: hjben/hadoop3-centos:3.2.0
+    image: hjben/hadoop-centos:3.2.0
     hostname: slave2
     container_name: slave2
     privileged: true
