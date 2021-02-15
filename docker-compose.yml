@@ -9,8 +9,8 @@ services:
       - 9870:9870
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup
-      - /tmp/hadoop:/usr/local/hadoop
-      - /tmp/hadoop_logs/logs:/opt/hadoop/logs
+      - /tmp/hadoop:/data/hadoop
+      - /tmp/hadoop_logs/logs:/usr/local/hadoop/logs
     networks:
       hadoop-cluster:
         ipv4_address: 10.0.2.2

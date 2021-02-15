@@ -5,7 +5,7 @@ systemctl start sshd
 # START HADOOP
 ##############
 
-rm -rf /usr/local/hadoop/*
+rm -rf /data/hadoop/*
 $HADOOP_HOME/bin/hdfs namenode -format
 
 $HADOOP_HOME/sbin/start-dfs.sh
