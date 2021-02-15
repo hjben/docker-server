@@ -34,8 +34,8 @@ Hadoop image based on hjben/centos-systemd:latest
 - When you create master, add network informations at the master container, like slave container.
 - Some volume mount option added for backup and logging.
 - Command to run master container is below.
-  - docker run -d --privileged --name {master_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup  -v /tmp/hadoop:{host_directory_for_hdfs} -v /tmp/hadoop_logs/logs:{host_directory_for_hadoop_log} --network {network_name} -p {port_for_cluster_manager}:8088 --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop:{hadoop_version}
-  - eg. docker run -d --privileged --name master -v /sys/fs/cgroup:/sys/fs/cgroup --network hadoop-cluster -p 12345:8088 --ip 10.0.2.2 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hjben/hadoop:3.2.0
+  - docker run -d --privileged --name {master_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup  -v /tmp/hadoop:{host_directory_for_hdfs} -v /tmp/hadoop_logs/logs:{host_directory_for_hadoop_log} --network {network_name} -p {port_for_cluster_manager}:8088 -p {port_for_hdfs_manager}:9870 --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop:{hadoop_version}
+  - eg. docker run -d --privileged --name master -v /sys/fs/cgroup:/sys/fs/cgroup --network hadoop-cluster -p 8088:8088 -p 9870:9870 --ip 10.0.2.2 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hjben/hadoop:3.2.0
 - Command Description
   - -d: Run with daemon (background) mode
   - --name {master_container_name}: Set container name to {master_container_name}
@@ -73,6 +73,7 @@ Hadoop image based on hjben/centos-systemd:latest
   - yarn jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-{hadoop_version}.jar pi 2 5
   - eg. yarn jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.0.jar pi 2 5
 - You can access to cluster manager web page on: http://localhost:{port_for_cluster_manager}
+- Or if you want to see hdfs manager web page, access to http://localhost:{port_for_hdfs_manager}
 
 ### Usage (with docker-compose)
 If your machine has docker-compose, you may use the docker-compose.yml file. Using docker-compose.yml, hadoop container will be automatically set with 1 master and 3 slaves.
