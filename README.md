@@ -1,6 +1,6 @@
 # hadoop
 ### Introduction
-Hadoop image based on hjben/centos-systemd:latest
+Hadoop image based on hjben/centos-openjdk:11
 
 ### Usage
 #### 1. Pull image
