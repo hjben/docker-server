@@ -1,22 +1,14 @@
-FROM hjben/centos-systemd:latest
+FROM hjben/centos-openjdk:11
 MAINTAINER hjben <hj.ben.kim@gmail.com>
 
 ENV HADOOP_HOME /opt/hadoop
-ENV JAVA_HOME /usr/lib/jvm/jre-1.8.0-openjdk
-
-RUN dnf install -y openssh-server openssh-clients openssh-askpass
-RUN dnf install -y rsync
-RUN dnf install -y vim
-RUN dnf install -y net-tools
-RUN dnf install -y java-1.8.0-openjdk
-RUN dnf install -y wget
 
 RUN if [ ! -e /usr/bin/python ]; then ln -s /usr/bin/python2.7 /usr/bin/python; fi
 
-RUN wget https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz && \ 
-    tar -xzf hadoop-3.2.0.tar.gz && \
-    rm -f hadoop-3.2.0.tar.gz && \
-    mv hadoop-3.2.0 $HADOOP_HOME && \
+RUN wget https://archive.apache.org/dist/hadoop/core/hadoop-3.2.2/hadoop-3.2.2.tar.gz && \ 
+    tar -xzf hadoop-3.2.2.tar.gz && \
+    rm -f hadoop-3.2.2.tar.gz && \
+    mv hadoop-3.2.2 $HADOOP_HOME && \
     for user in hadoop hdfs yarn mapred; do \
          useradd -U -M -d /opt/hadoop/ --shell /bin/bash ${user}; \
     done && \
@@ -47,6 +39,6 @@ RUN mkdir $HADOOP_HOME/logs
 
 EXPOSE 50010 50020 50070 50075 50090 8020 9000
 EXPOSE 10020 19888
-EXPOSE 8088 9870 9864 19888 8042 8888 8088
+EXPOSE 8088 9870 9864 19888 8042 8888
 
-CMD ["/usr/sbin/init"]
+ENTRYPOINT ["/usr/sbin/init"]
