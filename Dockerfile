@@ -9,7 +9,7 @@ RUN if [ ! -e /usr/bin/python ]; then ln -s /usr/bin/python2.7 /usr/bin/python; 
 
 RUN wget https://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
 RUN tar -xzf hadoop-$HADOOP_VERSION.tar.gz -C /usr/local && \
-    rm -f hadoop-$HADOOP_VERSION.tar.gz && \
+    rm -f hadoop-$HADOOP_VERSION.tar.gz
 
 RUN mkdir -p $HADOOP_HOME/logs
 RUN mkdir -p /data/hadoop/dfs
