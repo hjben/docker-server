@@ -1,13 +1,13 @@
 # hadoop
 ### Introduction
-Hadoop image based on hjben/centos-openjdk:11
+Hadoop image based on hjben/centos-openjdk
 
 ### Usage
 #### 1. Pull image
 - Pull docker image from the DockerHub, or build the image with Dockerfile.
 - Docker image tag is related to the version of hadoop.
-  - docker pull hjben/hadoop:{hadoop_version}
-  - eg. docker pull hjben/hadoop:3.2.2
+  - docker pull hjben/hadoop:{hadoop_version}-jdk{jdk_version}
+  - eg. docker pull hjben/hadoop:3.2.2-jdk11
 
 #### 2. Create docker subnet
 - Create subnet network for hadoop cluster.
@@ -19,8 +19,8 @@ Hadoop image based on hjben/centos-openjdk:11
 - Also add the subnet network information.
 - Repeat running the command until the number of slave is satisfied.
 - Command to run slave container is below.
-  - docker run -d --privileged --name {slave_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup --network {network_name} --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop:{hadoop_version}
-  - eg. docker run -d --privileged --name slave1 -v /sys/fs/cgroup:/sys/fs/cgroup -v /tmp/hadoop:/usr/local/hadoop -v /tmp/hadoop_logs/logs:/opt/hadoop/logs --network hadoop-cluster --ip 10.0.2.3 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hadoop:3.2.2
+  - docker run -d --privileged --name {slave_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup --network {network_name} --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop:{hadoop_version}-jdk{jdk_version}
+  - eg. docker run -d --privileged --name slave1 -v /sys/fs/cgroup:/sys/fs/cgroup -v /tmp/hadoop:/usr/local/hadoop -v /tmp/hadoop_logs/logs:/opt/hadoop/logs --network hadoop-cluster --ip 10.0.2.3 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hadoop:3.2.2-jdk11
 - Command Description
   - -d: Run with daemon (background) mode
   - --name {slave_container_name}: Set container name to {slave_container_name}
@@ -34,8 +34,8 @@ Hadoop image based on hjben/centos-openjdk:11
 - When you create master, add network informations at the master container, like slave container.
 - Some volume mount option added for backup and logging.
 - Command to run master container is below.
-  - docker run -d --privileged --name {master_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup  -v /tmp/hadoop:{host_directory_for_hdfs} -v /tmp/hadoop_logs/logs:{host_directory_for_hadoop_log} --network {network_name} -p {port_for_cluster_manager}:8088 -p {port_for_hdfs_manager}:9870 --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop:{hadoop_version}
-  - eg. docker run -d --privileged --name master -v /sys/fs/cgroup:/sys/fs/cgroup --network hadoop-cluster -p 8088:8088 -p 9870:9870 --ip 10.0.2.2 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hjben/hadoop:3.2.2
+  - docker run -d --privileged --name {master_container_name} -v /sys/fs/cgroup:/sys/fs/cgroup  -v /tmp/hadoop:{host_directory_for_hdfs} -v /tmp/hadoop_logs/logs:{host_directory_for_hadoop_log} --network {network_name} -p {port_for_cluster_manager}:8088 -p {port_for_hdfs_manager}:9870 --ip {ip} --add-host={master_host}:{master_ip} --add-host={slave_hosts}:{slave_ips} hjben/hadoop:{hadoop_version}-jdk{jdk_version}
+  - eg. docker run -d --privileged --name master -v /sys/fs/cgroup:/sys/fs/cgroup --network hadoop-cluster -p 8088:8088 -p 9870:9870 --ip 10.0.2.2 --add-host=master:10.0.2.2 --add-host=slave1:10.0.2.3 hjben/hadoop:3.2.2-jdk11
 - Command Description
   - -d: Run with daemon (background) mode
   - --name {master_container_name}: Set container name to {master_container_name}
