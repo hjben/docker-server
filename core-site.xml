@@ -1,10 +1,18 @@
 <configuration>
-    <property>
-        <name>fs.defaultFS</name>
-        <value>hdfs://master:9000</value>
-    </property>
-    <property>
-        <name>hadoop.tmp.dir</name>
-        <value>/data/hadoop/tmp</value>
-    </property>
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://master:9000</value>
+  </property>
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>/data/hadoop/tmp</value>
+  </property>
+  <property>
+   <name>hadoop.proxyuser.hadoop.hosts</name>
+   <value>*</value>
+  </property>
+  <property>
+   <name>hadoop.proxyuser.hadoop.groups</name>
+   <value>*</value>
+  </property>
 </configuration>
