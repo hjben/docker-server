@@ -36,6 +36,7 @@ RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
 
 ADD *xml $HADOOP_HOME/etc/hadoop/
 ADD workers $HADOOP_HOME/etc/hadoop/workers
+ADD hadoop-functions.sh $HADOOP_HOME/libexec/
 
 ADD ssh_config /root/.ssh/config
 ADD *start-all.sh /
