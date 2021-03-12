@@ -2,7 +2,7 @@ FROM hjben/centos-openjdk:11
 MAINTAINER hjben <hj.ben.kim@gmail.com>
 
 ENV HADOOP_HOME /usr/local/hadoop
-ENV HADOOP_VERSION 3.2.2
+ENV HADOOP_VERSION 3.3.0
 ENV PATH=$PATH:$HADOOP_HOME/bin
 
 RUN if [ ! -e /usr/bin/python ]; then ln -s /usr/bin/python2.7 /usr/bin/python; fi
