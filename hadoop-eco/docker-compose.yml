@@ -1,0 +1,110 @@
+services:
+  mariadb:
+    image: hjben/mariadb:10.5
+    hostname: mariadb
+    container_name: mariadb
+    privileged: true
+    ports:
+      - 3306:3306
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /Users/Shared/workspace/docker/maria-data:/var/lib/mysql 
+    environment:
+      MARIADB_ROOT_PASSWORD: mariadb
+    networks:
+      hadoop-cluster:
+        ipv4_address: 10.0.2.2
+    extra_hosts:
+      - "mariadb:10.0.2.2"
+      - "master:10.0.2.3"
+      - "slave1:10.0.2.4"
+      - "slave2:10.0.2.5"
+      - "slave3:10.0.2.6"
+    depends_on:
+      - master
+
+  master:
+    image: hjben/hadoop-eco:3.2.2
+    hostname: master
+    container_name: master
+    privileged: true
+    ports:
+      - 8088:8088
+      - 9870:9870
+      - 8042:8042
+      - 10002:10002
+      - 16010:16010
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /tmp/hadoop:/data/hadoop
+      - /tmp/hadoop_logs:/usr/local/hadoop/logs
+      - /tmp/hive_logs:/usr/local/hive/logs
+      - /tmp/sqoop_logs:/usr/local/sqoop/logs
+    networks:
+      hadoop-cluster:
+        ipv4_address: 10.0.2.3
+    extra_hosts:
+      - "mariadb:10.0.2.2"
+      - "master:10.0.2.3"
+      - "slave1:10.0.2.4"
+      - "slave2:10.0.2.5"
+      - "slave3:10.0.2.6"
+    depends_on:
+      - slave1
+      - slave2
+      - slave3
+  slave1:
+    image: hjben/hbase:1.6.0-hadoop3.2.2
+    hostname: slave1
+    container_name: slave1
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+    networks:
+      hadoop-cluster:
+        ipv4_address: 10.0.2.4
+    extra_hosts:
+      - "mariadb:10.0.2.2"
+      - "master:10.0.2.3"
+      - "slave1:10.0.2.4"
+      - "slave2:10.0.2.5"
+      - "slave3:10.0.2.6"
+  slave2:
+    image: hjben/hbase:1.6.0-hadoop3.2.2
+    hostname: slave2
+    container_name: slave2
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+    networks:
+      hadoop-cluster:
+        ipv4_address: 10.0.2.5
+    extra_hosts:
+      - "mariadb:10.0.2.2"
+      - "master:10.0.2.3"
+      - "slave1:10.0.2.4"
+      - "slave2:10.0.2.5"
+      - "slave3:10.0.2.6"
+  slave3:
+    image: hjben/hbase:1.6.0-hadoop3.2.2
+    hostname: slave3
+    container_name: slave3
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+    networks:
+      hadoop-cluster:
+        ipv4_address: 10.0.2.6
+    extra_hosts:
+      - "mariadb:10.0.2.2"
+      - "master:10.0.2.3"
+      - "slave1:10.0.2.4"
+      - "slave2:10.0.2.5"
+      - "slave3:10.0.2.6"
+
+networks:
+ hadoop-cluster:
+  ipam:
+   driver: default
+   config:
+   - subnet: 10.0.2.0/24

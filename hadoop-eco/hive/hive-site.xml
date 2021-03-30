@@ -1,0 +1,44 @@
+<configuration>
+  <property>
+    <name>hive.metastore.local</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionURL</name>
+    <value>jdbc:mariadb://mariadb:3306/hive?createDatabaseifNotExist=true&amp;useSSL=false</value>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionDriverName</name>
+    <value>org.mariadb.jdbc.Driver</value>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionUserName</name>
+    <value>hive</value>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionPassword</name>
+    <value>hive</value>
+  </property>
+
+  <property>
+    <name>hive.cli.print.header</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>hive.server2.enable.doAs</name>
+      <value>false</value>
+      <description>
+        Setting this property to true will have HiveServer2 execute
+        Hive operations as the user making the calls to it.
+      </description>
+  </property>
+  <property>
+    <name>hive.exec.local.scratchdir</name>
+    <value>/usr/local/hive/logs/${user.name}</value>
+  </property>
+
+  <property>
+    <name>hive.metastore.urls</name>
+    <value>thrift://master:9083</value>
+  </property>
+</configuration>
