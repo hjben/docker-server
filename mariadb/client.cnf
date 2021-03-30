@@ -1,0 +1,14 @@
+#
+# These two groups are read by the client library
+# Use it for options that affect all clients, but not the server
+#
+
+
+[client]
+default-character-set=utf8
+
+# This group is not read by mysql client library,
+# If you use the same .cnf file for MySQL and MariaDB,
+# use it for MariaDB-only client options
+[client-mariadb]
+

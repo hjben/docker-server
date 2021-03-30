@@ -1,0 +1,25 @@
+#
+# These groups are read by MariaDB command-line tools
+# Use it for options that affect only one utility
+#
+
+[mysql]
+default-character-set=utf8
+
+[mysql_upgrade]
+
+[mysqladmin]
+
+[mysqlbinlog]
+
+[mysqlcheck]
+
+[mysqldump]
+default-character-set=utf8
+
+[mysqlimport]
+
+[mysqlshow]
+
+[mysqlslap]
+

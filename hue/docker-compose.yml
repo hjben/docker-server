@@ -1,0 +1,43 @@
+services:
+  master:
+    image: hjben/hue:4.9
+    hostname: hue
+    container_name: hue
+    privileged: true
+    ports:
+      - 8000:8000
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+    networks:
+      hadoop-cluster:
+        ipv4_address: 10.0.2.2
+    extra_hosts:
+      - "hue:10.0.2.2"
+      - "mariadb:10.0.2.3"
+    depends_on:
+      - mariadb
+  mariadb:
+    image: hjben/mariadb:10.5
+    hostname: mariadb
+    container_name: mariadb
+    privileged: true
+    ports:
+      - 3306:3306
+    volumes:
+      - /Users/Shared/workspace/docker/maria-data:/var/lib/mysql 
+      - /sys/fs/cgroup:/sys/fs/cgroup
+    environment:
+      MARIADB_ROOT_PASSWORD: mariadb
+    networks:
+      hadoop-cluster:
+        ipv4_address: 10.0.2.3
+    extra_hosts:
+      - "hue:10.0.2.2"
+      - "mariadb:10.0.2.3"
+
+networks:
+ hadoop-cluster:
+  ipam:
+   driver: default
+   config:
+   - subnet: 10.0.2.0/24
