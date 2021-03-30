@@ -20,7 +20,7 @@ services:
       - "slave2:10.0.2.5"
 
   master:
-    image: hjben/spark:3.0.1
+    image: hjben/spark:3.0.2-jdk11
     hostname: master
     container_name: master
     privileged: true
@@ -42,7 +42,7 @@ services:
       - slave1
       - slave2
   slave1:
-    image: hjben/spark:3.0.1
+    image: hjben/spark:3.0.2-jdk11
     hostname: slave1
     container_name: slave1
     privileged: true
@@ -61,7 +61,7 @@ services:
       - "slave1:10.0.2.4"
       - "slave2:10.0.2.5"
   slave2:
-    image: hjben/spark:3.0.1
+    image: hjben/spark:3.0.2-jdk11
     hostname: slave2
     container_name: slave2
     privileged: true
