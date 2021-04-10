@@ -3,7 +3,7 @@ MAINTAINER hjben <hj.ben.kim@gmail.com>
 
 ENV HADOOP_CONF_DIR $HADOOP_HOME/etc/hadoop
 ENV HIVE_HOME /usr/local/hive
-ENV HIVE_VERSION 3.1.1
+ENV HIVE_VERSION 3.1.2
 ENV HIVE_CONF_DIR $HIVE_HOME/conf
 ENV SQOOP_HOME /usr/local/sqoop
 ENV SQOOP_VERSION 1.4.7
