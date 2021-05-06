@@ -1,9 +1,9 @@
-FROM hjben/centos-openjdk:1.8.0
+FROM hjben/centos-openjdk:11
 MAINTAINER hjben <hj.ben.kim@gmail.com>
 
 ENV SPARK_HOME /usr/local/spark
 ENV SPARK_CLASSPATH $SPARK_HOME/jars
-ENV SPARK_VERSION 3.0.2
+ENV SPARK_VERSION 3.1.1
 ENV SPARK_HADOOP_VERSION 3.2
 ENV HADOOP_CONF_DIR $SPARK_HOME/hadoop-conf/
 ENV HADOOP_USER_NAME root
