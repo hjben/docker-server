@@ -1,6 +1,6 @@
 services:
   jupyter-lab:
-    image: hjben/jupyter-lab:spark
+    image: hjben/jupyter-lab:spark-livy
     hostname: jupyter-lab
     container_name: jupyter-lab
     privileged: true
@@ -20,12 +20,13 @@ services:
       - "slave2:10.0.2.5"
 
   master:
-    image: hjben/spark:3.0.2-jdk11
+    image: hjben/spark:3.1.1-livy
     hostname: master
     container_name: master
     privileged: true
     ports:
       - 8080-8081:8080-8081
+      - 8998:8998
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup
       - /Users/a10053/workspace/docker/spark-notebook:/root/workspace
@@ -42,7 +43,7 @@ services:
       - slave1
       - slave2
   slave1:
-    image: hjben/spark:3.0.2-jdk11
+    image: hjben/spark:3.1.1-jdk1.8.0
     hostname: slave1
     container_name: slave1
     privileged: true
@@ -61,7 +62,7 @@ services:
       - "slave1:10.0.2.4"
       - "slave2:10.0.2.5"
   slave2:
-    image: hjben/spark:3.0.2-jdk11
+    image: hjben/spark:3.1.1-jdk1.8.0
     hostname: slave2
     container_name: slave2
     privileged: true
