@@ -16,8 +16,8 @@ services:
     extra_hosts:
       - "jupyter-lab:10.0.2.2"
       - "master:10.0.2.3"
-      - "slave1:10.0.2.4"
-      - "slave2:10.0.2.5"
+      - "worker1:10.0.2.4"
+      - "worker2:10.0.2.5"
 
   master:
     image: hjben/spark:3.1.1-livy
@@ -37,49 +37,49 @@ services:
     extra_hosts:
       - "jupyter-lab:10.0.2.2"
       - "master:10.0.2.3"
-      - "slave1:10.0.2.4"
-      - "slave2:10.0.2.5"
+      - "worker1:10.0.2.4"
+      - "worker2:10.0.2.5"
     depends_on:
-      - slave1
-      - slave2
-  slave1:
+      - worker1
+      - worker2
+  worker1:
     image: hjben/spark:3.1.1-jdk1.8.0
-    hostname: slave1
-    container_name: slave1
+    hostname: worker1
+    container_name: worker1
     privileged: true
     ports:
       - 8082:8081
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup
       - /Users/a10053/workspace/docker/spark-notebook:/root/workspace
-      - /tmp/spark/logs/slave1:/usr/local/spark/logs
+      - /tmp/spark/logs/worker1:/usr/local/spark/logs
     networks:
       spark-cluster:
         ipv4_address: 10.0.2.4
     extra_hosts:
       - "jupyter-lab:10.0.2.2"
       - "master:10.0.2.3"
-      - "slave1:10.0.2.4"
-      - "slave2:10.0.2.5"
-  slave2:
+      - "worker1:10.0.2.4"
+      - "worker2:10.0.2.5"
+  worker2:
     image: hjben/spark:3.1.1-jdk1.8.0
-    hostname: slave2
-    container_name: slave2
+    hostname: worker
+    container_name: worker
     privileged: true
     ports:
       - 8083:8081
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup
       - /Users/a10053/workspace/docker/spark-notebook:/root/workspace
-      - /tmp/spark/logs/slave1:/usr/local/spark/logs
+      - /tmp/spark/logs/worker2:/usr/local/spark/logs
     networks:
       spark-cluster:
         ipv4_address: 10.0.2.5
     extra_hosts:
       - "jupyter-lab:10.0.2.2"
       - "master:10.0.2.3"
-      - "slave1:10.0.2.4"
-      - "slave2:10.0.2.5"
+      - "worker1:10.0.2.4"
+      - "worker2:10.0.2.5"
 
 networks:
  spark-cluster:
