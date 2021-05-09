@@ -1,0 +1,188 @@
+services:
+  mariadb:
+    image: hjben/mariadb:10.5
+    hostname: mariadb
+    container_name: mariadb
+    privileged: true
+    ports:
+      - 3306:3306
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /Users/Shared/workspace/docker/maria-data:/var/lib/mysql 
+    environment:
+      MARIADB_ROOT_PASSWORD: mariadb
+    networks:
+      airflow-cluster:
+        ipv4_address: 10.0.2.2
+    extra_hosts:
+      - "mariadb:10.0.2.2"
+      - "jupyter-lab:10.0.2.3"
+      - "redis:10.0.2.4"
+      - "webserver:10.0.2.5"
+      - "scheduler:10.0.2.6"
+      - "flower:10.0.2.7"
+      - "worker1:10.0.2.8"
+      - "worker2:10.0.2.9"
+
+  jupyter-lab:
+    image: hjben/jupyter-lab:latest
+    hostname: jupyter-lab
+    container_name: jupyter-lab
+    privileged: true
+    ports:
+      - 8888:8888
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /Users/a10053/workspace/docker-ws/airflow-dags:/root/workspace
+    networks:
+      airflow-cluster:
+        ipv4_address: 10.0.2.3
+    extra_hosts:
+      - "mariadb:10.0.2.2"
+      - "jupyter-lab:10.0.2.3"
+      - "redis:10.0.2.4"
+      - "webserver:10.0.2.5"
+      - "scheduler:10.0.2.6"
+      - "flower:10.0.2.7"
+      - "worker1:10.0.2.8"
+      - "worker2:10.0.2.9"
+
+  redis:
+    image: hjben/redis:latest
+    hostname: redis
+    container_name: redis
+    privileged: true
+    ports:
+      - 6379:6379
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+    networks:
+      airflow-cluster:
+        ipv4_address: 10.0.2.4
+    extra_hosts:
+      - "mariadb:10.0.2.2"
+      - "jupyter-lab:10.0.2.3"
+      - "redis:10.0.2.4"
+      - "webserver:10.0.2.5"
+      - "scheduler:10.0.2.6"
+      - "flower:10.0.2.7"
+      - "worker1:10.0.2.8"
+      - "worker2:10.0.2.9"
+
+  webserver:
+    image: hjben/airflow:2.0.2
+    hostname: webserver
+    container_name: webserver
+    privileged: true
+    ports:
+      - 18080:8080
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /tmp/airflow/logs:/usr/local/airflow/logs
+    networks:
+      airflow-cluster:
+        ipv4_address: 10.0.2.5
+    extra_hosts:
+      - "mariadb:10.0.2.2"
+      - "jupyter-lab:10.0.2.3"
+      - "redis:10.0.2.4"
+      - "webserver:10.0.2.5"
+      - "scheduler:10.0.2.6"
+      - "flower:10.0.2.7"
+      - "worker1:10.0.2.8"
+      - "worker2:10.0.2.9"
+
+  scheduler:
+    image: hjben/airflow:2.0.2
+    hostname: scheduler
+    container_name: scheduler
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /tmp/airflow/logs:/usr/local/airflow/logs
+      - /Users/a10053/workspace/docker-ws/airflow-dags:/usr/local/airflow/dags
+    networks:
+      airflow-cluster:
+        ipv4_address: 10.0.2.6
+    extra_hosts:
+      - "mariadb:10.0.2.2"
+      - "jupyter-lab:10.0.2.3"
+      - "redis:10.0.2.4"
+      - "webserver:10.0.2.5"
+      - "scheduler:10.0.2.6"
+      - "flower:10.0.2.7"
+      - "worker1:10.0.2.8"
+      - "worker2:10.0.2.9"
+
+  flower:
+    image: hjben/airflow:2.0.2
+    hostname: flower
+    container_name: flower
+    privileged: true
+    ports:
+      - 5555:5555
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+    networks:
+      airflow-cluster:
+        ipv4_address: 10.0.2.7
+    extra_hosts:
+      - "mariadb:10.0.2.2"
+      - "jupyter-lab:10.0.2.3"
+      - "redis:10.0.2.4"
+      - "webserver:10.0.2.5"
+      - "scheduler:10.0.2.6"
+      - "flower:10.0.2.7"
+      - "worker1:10.0.2.8"
+      - "worker2:10.0.2.9"
+
+  worker1:
+    image: hjben/airflow:2.0.2
+    hostname: worker1
+    container_name: worker1
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /tmp/airflow/logs:/usr/local/airflow/logs
+      - /Users/a10053/workspace/docker-ws/airflow-dags:/usr/local/airflow/dags
+    networks:
+      airflow-cluster:
+        ipv4_address: 10.0.2.8
+    extra_hosts:
+      - "mariadb:10.0.2.2"
+      - "jupyter-lab:10.0.2.3"
+      - "redis:10.0.2.4"
+      - "webserver:10.0.2.5"
+      - "scheduler:10.0.2.6"
+      - "flower:10.0.2.7"
+      - "worker1:10.0.2.8"
+      - "worker2:10.0.2.9"
+
+  worker2:
+    image: hjben/airflow:2.0.2
+    hostname: worker2
+    container_name: worker2
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /tmp/airflow/logs:/usr/local/airflow/logs
+      - /Users/a10053/workspace/docker-ws/airflow-dags:/usr/local/airflow/dags
+    networks:
+      airflow-cluster:
+        ipv4_address: 10.0.2.9
+    extra_hosts:
+      - "mariadb:10.0.2.2"
+      - "jupyter-lab:10.0.2.3"
+      - "redis:10.0.2.4"
+      - "webserver:10.0.2.5"
+      - "scheduler:10.0.2.6"
+      - "flower:10.0.2.7"
+      - "worker1:10.0.2.8"
+      - "worker2:10.0.2.9"
+
+networks:
+ airflow-cluster:
+  ipam:
+   driver: default
+   config:
+   - subnet: 10.0.2.0/24
