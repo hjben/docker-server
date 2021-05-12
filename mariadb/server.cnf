@@ -11,9 +11,10 @@
 # this is only for the mysqld standalone daemon
 [mysqld]
 port = 3306
-character-set-server = utf8mb4
-collation-server = utf8mb4_unicode_ci
+character-set-server=utf8mb4
+collation-server=utf8mb4_unicode_ci
 bind-address=0.0.0.0
+explicit_defaults_for_timestamp=1
 
 #
 # * Galera-related settings
