@@ -19,4 +19,3 @@ RUN mv mariadb-java-client-$MARIADB_CONNECTOR_VERSION.jar $SQOOP_HOME/lib/
 RUN rm -f $SQOOP_HOME/lib/guava-*.jar && cp $HADOOP_HOME/share/hadoop/hdfs/lib/guava-*.jar $SQOOP_HOME/lib/
 ADD lib/*.jar $SQOOP_HOME/lib/
 
-ENTRYPOINT ["/usr/sbin/init"]

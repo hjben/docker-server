@@ -19,6 +19,5 @@ RUN chmod 755 set-user.sh
 
 EXPOSE 8080
 
-ENTRYPOINT ["/usr/sbin/init"]
 
 

@@ -21,4 +21,3 @@ RUN mkdir $HBASE_HOME/logs
 
 EXPOSE 16010 60010 60030
 
-ENTRYPOINT ["/usr/sbin/init"]

@@ -25,6 +25,5 @@ WORKDIR /
 
 EXPOSE 9000
 
-ENTRYPOINT ["/usr/sbin/init"]
 
 

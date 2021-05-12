@@ -24,4 +24,3 @@ ADD airflow.cfg $AIRFLOW_HOME/
 
 EXPOSE 5555 8080 8793
 
-ENTRYPOINT ["/usr/sbin/init"]

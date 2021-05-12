@@ -20,5 +20,3 @@ RUN echo dataDir=$(echo $ZOOKEEPER_DATA_DIR) >> $ZOOKEEPER_HOME/conf/zoo.cfg
 RUN echo dynamicConfigFile=$(echo $ZOOKEEPER_HOME)/conf/zoo.cfg.dynamic >> $ZOOKEEPER_HOME/conf/zoo.cfg
 
 EXPOSE 2181 2888 3888 8080
-
-ENTRYPOINT ["/usr/sbin/init"]

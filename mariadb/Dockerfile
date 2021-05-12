@@ -12,5 +12,3 @@ RUN chmod 755 init.sh
 RUN chmod 755 set-root-password.sh
 
 EXPOSE 3306
-
-ENTRYPOINT ["/usr/sbin/init"]

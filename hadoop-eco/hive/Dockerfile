@@ -21,5 +21,3 @@ RUN rm -f $HIVE_HOME/lib/guava-*.jar && cp $HADOOP_HOME/share/hadoop/hdfs/lib/gu
 RUN mkdir $HIVE_HOME/logs
 
 EXPOSE 9083 10000 10002
-
-ENTRYPOINT ["/usr/sbin/init"]

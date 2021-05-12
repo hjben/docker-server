@@ -14,5 +14,3 @@ RUN mkdir /root/workspace
 ADD jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
 
 EXPOSE 8888
-
-ENTRYPOINT ["/usr/sbin/init"]

@@ -42,4 +42,3 @@ RUN mv mariadb-java-client-$MARIADB_CONNECTOR_VERSION.jar $SQOOP_HOME/lib/
 
 EXPOSE 9083 10000 10002
 
-ENTRYPOINT ["/usr/sbin/init"]

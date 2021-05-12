@@ -12,5 +12,3 @@ RUN dnf install -y git
 
 RUN git clone https://github.com/hjben/hadoop.git
 RUN mv hadoop/ $HADOOP_CONF_DIR
-
-ENTRYPOINT ["/usr/sbin/init"]

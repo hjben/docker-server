@@ -23,5 +23,3 @@ RUN mvn clean package -B -V -e -Pspark-3.0 -Pthriftserver -DskipTests -DskipITs 
 WORKDIR /
 
 EXPOSE 8998
-
-ENTRYPOINT ["/usr/sbin/init"]

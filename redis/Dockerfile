@@ -5,5 +5,3 @@ RUN dnf install -y redis
 ADD redis-init.sh /
 
 EXPOSE 6379
-
-ENTRYPOINT ["/usr/sbin/init"]

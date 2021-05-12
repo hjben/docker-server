@@ -25,4 +25,3 @@ RUN chmod 755 start-kafka.sh
 EXPOSE 9092-9099
 EXPOSE 9999
 
-ENTRYPOINT ["/usr/sbin/init"]
