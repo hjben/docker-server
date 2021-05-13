@@ -1,5 +1,5 @@
 #!/bin/bash
 
-echo "Starting MariaDB server..."
+echo "Stopping MariaDB server..."
 systemctl stop mariadb
 echo "Done."
