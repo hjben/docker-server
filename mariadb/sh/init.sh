@@ -2,8 +2,8 @@
 
 echo "Initialize MariaDB."
 systemctl enable mariadb
-/shell/start.sh
+/sh/start.sh
 
 root_password=$MARIADB_ROOT_PASSWORD
-source /shell/set-root-password.sh $root_password
+/sh/set-root-password.sh $root_password init
 echo "Initialization done."
