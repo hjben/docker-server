@@ -3,9 +3,9 @@
 container_name=$1
 flag=$2
 
-if [ -z $container_name ]
+if [ -z $flag ]
 then
-  echo "container_name is empty. Usage: container-run.sh <container_name> <flag [ start | stop ]>"
+  echo "Some parameter value is empty. Usage: container-run.sh <container_name> <flag [ start | stop ]>"
   exit 1
 fi
 
