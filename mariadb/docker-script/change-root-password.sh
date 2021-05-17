@@ -5,7 +5,7 @@ new_password=$2
 
 if [ -z $new_password ]
 then
-  echo "Some parameter value is empty. Usage: change-root-password.sh [container_name] [new_password]"
+  echo "Some parameter value is empty. Usage: change-root-password.sh <container_name> <new_password>"
   exit 1
 fi
 

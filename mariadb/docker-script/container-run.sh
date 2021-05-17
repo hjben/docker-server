@@ -5,7 +5,7 @@ flag=$2
 
 if [ -z $container_name ]
 then
-  echo "container_name is empty. Usage: container-run.sh [container_name] [flag: start | stop]"
+  echo "container_name is empty. Usage: container-run.sh <container_name> <flag [ start | stop ]>"
   exit 1
 fi
 

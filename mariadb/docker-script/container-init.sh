@@ -1,25 +1,18 @@
 #!/bin/bash
 
 container_name=$1
-forward_port=$2
-data_path=$3
-root_password=$4
-image_name=$5
+image_version=$2
+root_password=$3
+data_path=$4
 
-if [ -z $image_name ]
+if [ -z $data_path ]
 then
-  echo "Some parameter value is empty. Usage: container-init.sh [container_name] [forward_port] [data_path] [root_password] [image_name]"
-  exit 1
-fi
-
-if [[ ! $forward_port =~ ^[0-9]+$ ]]
-then
-  echo "Invalid port. forward_port must be a numeric value"
+  echo "Some parameter value is empty. Usage: container-init.sh <container_name> <image_version> <root_password> <data_path>"
   exit 1
 fi
 
 echo "Create MariaDB container."
-(docker run --privileged --name $container_name -d -p $forward_port:3306 -v $data_path:/var/lib/mysql -v /sys/fs/cgroup:/sys/fs/cgroup -e MARIADB_ROOT_PASSWORD=$root_password $image_name)
+(docker run --privileged --name $container_name -d -p 3306:3306 -v $data_path:/var/lib/mysql -v /sys/fs/cgroup:/sys/fs/cgroup -e MARIADB_ROOT_PASSWORD=$root_password hjben/mariadb:$image_version)
 code=$?
 
 if [ $code -gt 0 ]
