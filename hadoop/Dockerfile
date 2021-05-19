@@ -14,6 +14,7 @@ RUN ln -s /usr/local/hadoop-$HADOOP_VERSION $HADOOP_HOME
 
 RUN mkdir -p $HADOOP_HOME/logs
 RUN mkdir -p /data/hadoop/dfs
+RUN mkdir -p /sh
 
 RUN for user in hadoop hdfs yarn mapred; do \
          useradd -U -M -d $HADOOP_HOME --shell /bin/bash ${user}; \
@@ -34,13 +35,13 @@ RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
     cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
     chmod 0600 ~/.ssh/authorized_keys
 
-ADD *xml $HADOOP_HOME/etc/hadoop/
-ADD workers $HADOOP_HOME/etc/hadoop/workers
-ADD hadoop-functions.sh $HADOOP_HOME/libexec/
+ADD conf/*xml $HADOOP_HOME/etc/hadoop/
+ADD conf/workers $HADOOP_HOME/etc/hadoop/workers
+ADD conf/hadoop-functions.sh $HADOOP_HOME/libexec/
 
-ADD ssh_config /root/.ssh/config
-ADD *start-all.sh /
-RUN chmod 755 *start-all.sh
+ADD conf/ssh_config /root/.ssh/config
+ADD sh/*start-all.sh /sh/
+RUN chmod 755 /sh/*start-all.sh
 
 EXPOSE 9864 9866 9867 9868 9870  
 EXPOSE 8020 8042 8088 8888 9000 10020 19888

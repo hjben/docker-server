@@ -15,8 +15,8 @@ RUN ln -s /usr/local/apache-hive-$HIVE_VERSION-bin $HIVE_HOME
 RUN wget https://downloads.mariadb.com/Connectors/java/connector-java-$MARIADB_CONNECTOR_VERSION/mariadb-java-client-$MARIADB_CONNECTOR_VERSION.jar
 RUN mv mariadb-java-client-$MARIADB_CONNECTOR_VERSION.jar $HIVE_HOME/lib/
 
-ADD hive-site.xml $HIVE_HOME/conf/
-ADD *sh $HIVE_HOME/bin/
+ADD conf/hive-site.xml $HIVE_HOME/conf/
+ADD sh/*sh $HIVE_HOME/bin/
 RUN rm -f $HIVE_HOME/lib/guava-*.jar && cp $HADOOP_HOME/share/hadoop/hdfs/lib/guava-*.jar $HIVE_HOME/lib/
 RUN mkdir $HIVE_HOME/logs
 
