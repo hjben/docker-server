@@ -14,7 +14,8 @@ WORKDIR /zk-web
 RUN lein deps
 
 WORKDIR /
-ADD set-user.sh /
+RUN mkdir /sh
+ADD sh/set-user.sh /sh/
 RUN chmod 755 set-user.sh
 
 EXPOSE 8080
