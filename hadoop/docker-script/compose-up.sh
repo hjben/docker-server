@@ -7,7 +7,7 @@ slaves=$4
 
 if [ -z $slaves ]
 then
-  echo "Some parameter value is empty. Usage: container-init.sh <hadoop_version> <hdfs_path> <log_path> <(The # of)slaves>"
+  echo "Some parameter value is empty. Usage: compose-up.sh <hadoop_version> <hdfs_path> <log_path> <(The # of)slaves>"
   exit 1
 fi
 

@@ -4,7 +4,7 @@ flag=$1
 
 if [ -z $flag ]
 then
-  echo "Some parameter value is empty. Usage: container-init.sh <flag [ start | restart ]>"
+  echo "Some parameter value is empty. Usage: hadoop-start.sh <flag [ start | restart ]>"
   exit 1
 fi
 
