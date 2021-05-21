@@ -13,7 +13,7 @@ fi
 
 if [[ ! $slaves =~ ^-?[0-9]+$ ]]
 then
-  echo "The # of slaves are not integer."
+  echo "The # of slaves is not integer."
   exit 1
 elif [[ $slaves -le 1 ]]
 then
@@ -61,7 +61,7 @@ do
       hadoop-cluster:
         ipv4_address: 10.0.2.'$(($slave+2))'
     extra_hosts:
-      - "master:10.0.0.2"
+      - "master:10.0.2.2"
 '$ip_addr
   if [[ ! $slave -eq $slaves ]]
   then
@@ -89,7 +89,7 @@ services:
       hadoop-cluster:
         ipv4_address: 10.0.2.2
     extra_hosts:
-      - "master:10.0.0.2"
+      - "master:10.0.2.2"
 $ip_addr
 $slave_service
 networks:
