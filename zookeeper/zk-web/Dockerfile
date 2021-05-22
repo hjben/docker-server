@@ -16,7 +16,7 @@ RUN lein deps
 WORKDIR /
 RUN mkdir /sh
 ADD sh/set-user.sh /sh/
-RUN chmod 755 set-user.sh
+RUN chmod 755 /sh/set-user.sh
 
 EXPOSE 8080
 
