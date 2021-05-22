@@ -8,7 +8,7 @@ then
   exit 1
 fi
 
-if [ $flag != "start" ] && [ $image_type != "restart" ] ; then
+if [ $flag != "start" ] && [ $flag != "restart" ] ; then
   echo "Wrong flag detected. Available flag is [ start | restart ]"
   exit 1
 fi
