@@ -25,9 +25,6 @@ fi
 
 echo "Set docker-compose.yml file."
 
-workers='master
-'
-
 for slave in $(seq 1 $slaves)
 do
   workers+=slave$slave
@@ -39,6 +36,7 @@ do
 done
 
 cat << EOF > workers
+master
 $workers
 EOF
 
