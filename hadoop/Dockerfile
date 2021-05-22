@@ -36,7 +36,6 @@ RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
     chmod 0600 ~/.ssh/authorized_keys
 
 ADD conf/*xml $HADOOP_HOME/etc/hadoop/
-ADD conf/workers $HADOOP_HOME/etc/hadoop/workers
 ADD conf/hadoop-functions.sh $HADOOP_HOME/libexec/
 
 ADD conf/ssh_config /root/.ssh/config
