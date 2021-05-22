@@ -99,9 +99,9 @@ EOF
 echo "Done."
 
 echo "Docker-compose container run."
-echo "Remove old containers."
-docker-compose down --remove-orphans
-sleep 1
+# echo "Remove old containers."
+# docker-compose down --remove-orphans
+# sleep 1
 
 echo "Create new containers."
 docker-compose up -d
