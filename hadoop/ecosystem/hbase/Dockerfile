@@ -13,11 +13,10 @@ RUN tar -xzf /hbase-$HBASE_VERSION-bin.tar.gz -C /usr/local && \
     rm -f /hbase-$HBASE_VERSION-bin.tar.gz
 RUN ln -s /usr/local/hbase-$HBASE_VERSION $HBASE_HOME
 
-ADD conf/regionservers $HBASE_HOME/conf
 ADD conf/hbase-site.xml $HBASE_HOME/conf
 
 RUN echo export JAVA_HOME=$(echo $JAVA_HOME) >> $HBASE_HOME/conf/hbase-env.sh
 RUN mkdir $HBASE_HOME/logs
 
-EXPOSE 16010 60010 60030
+EXPOSE 16010 16030 60010 60030
 
