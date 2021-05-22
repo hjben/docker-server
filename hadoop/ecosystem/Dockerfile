@@ -16,8 +16,8 @@ RUN tar -xzf apache-hive-$HIVE_VERSION-bin.tar.gz -C /usr/local && \
     rm -f apache-hive-$HIVE_VERSION-bin.tar.gz
 RUN ln -s /usr/local/apache-hive-$HIVE_VERSION-bin $HIVE_HOME
 
-ADD hive/hive-site.xml $HIVE_HOME/conf/
-ADD hive/*sh $HIVE_HOME/bin/
+ADD hive/conf/hive-site.xml $HIVE_HOME/conf/
+ADD hive/sh/*sh $HIVE_HOME/bin/
 RUN chmod 755 $HIVE_HOME/bin/init-hive-dfs.sh
 RUN mkdir $HIVE_HOME/logs
 
