@@ -13,7 +13,7 @@ if [ $flag != "start" ] && [ $flag != "restart" ] ; then
   exit 1
 fi
 
-echo "Run Hadoop service."
+echo "Start Hadoop service."
 if [ $flag = "restart" ]
 then
   docker exec -it master bash -c "/sh/restart-all.sh"

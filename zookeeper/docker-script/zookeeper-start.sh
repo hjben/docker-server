@@ -32,7 +32,7 @@ if [ $flag != "start" ] && [ $flag != "restart" ] ; then
   exit 1
 fi
 
-echo "Run Zookeeper service."
+echo "Start Zookeeper service."
 if [ $flag = "restart" ]
 then
   for server in $(seq 1 $servers)
@@ -48,5 +48,5 @@ then
 fi
 echo "Done."
 
-echo "Run Zookeeper web server."
+echo "Start Zookeeper web server."
 docker exec -it zk-web bash -c "cd zk-web && lein run"
