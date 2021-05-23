@@ -19,6 +19,7 @@ RUN ln -s /usr/local/apache-hive-$HIVE_VERSION-bin $HIVE_HOME
 ADD hive/conf/hive-site.xml $HIVE_HOME/conf/
 ADD hive/sh/*sh $HIVE_HOME/bin/
 RUN chmod 755 $HIVE_HOME/bin/init-hive-dfs.sh
+RUN chmod 755 $HIVE_HOME/bin/stop-server.sh
 RUN mkdir $HIVE_HOME/logs
 
 RUN wget https://downloads.apache.org/sqoop/$SQOOP_VERSION/sqoop-$SQOOP_VERSION.bin__hadoop-$SQOOP_HADOOP_VERSION.tar.gz
