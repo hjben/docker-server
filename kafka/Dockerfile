@@ -18,8 +18,10 @@ RUN tar -xvf kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz -C /usr/local && \
     rm -f kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz
 RUN ln -s /usr/local/kafka_$SCALA_VERSION-$KAFKA_VERSION/ $KAFKA_HOME  
 
-ADD server.properties $KAFKA_HOME/config/server.properties
-ADD start-kafka.sh /
+ADD conf/server.properties $KAFKA_HOME/config/server.properties
+
+RUN mkdir /sh
+ADD sh/start-kafka.sh /sh/
 RUN chmod 755 start-kafka.sh
 
 EXPOSE 9092-9099
