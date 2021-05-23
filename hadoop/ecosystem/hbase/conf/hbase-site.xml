@@ -54,7 +54,7 @@
 
   <property>
     <name>hbase.zookeeper.quorum</name>
-    <value>10.0.3.2</value>
+    <value>10.0.3.1</value>
   </property>
   <property>
     <name>dfs.replication</name>
