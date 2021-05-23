@@ -115,4 +115,5 @@ do
 done
 echo "Done."
 
+rm -f workers
 ./hadoop-start.sh start
