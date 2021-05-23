@@ -1,15 +1,15 @@
 #!/bin/bash
 
 zookeeper_version=$1
-data_path=$2
-log_path=$3
-servers=$4
+servers=$2
+data_path=$3
+log_path=$4
 web_user=$5
 web_password=$6
 
 if [ -z $web_password ]
 then
-  echo "Some parameter value is empty. Usage: compose-up.sh <zookeeper_version> <data_path> <log_path> <(The # of ensemble)servers [odd number]> <web_user> <web_password>"
+  echo "Some parameter value is empty. Usage: compose-up.sh <zookeeper_version> <(The # of ensemble)servers [odd number]> <data_path> <log_path> <web_user> <web_password>"
   exit 1
 fi
 

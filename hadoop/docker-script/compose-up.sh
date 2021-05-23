@@ -1,13 +1,13 @@
 #!/bin/bash
 
 hadoop_version=$1
-hdfs_path=$2
-log_path=$3
-slaves=$4
+slaves=$2
+hdfs_path=$3
+log_path=$4
 
-if [ -z $slaves ]
+if [ -z $log_path ]
 then
-  echo "Some parameter value is empty. Usage: compose-up.sh <hadoop_version> <hdfs_path> <log_path> <(The # of)slaves>"
+  echo "Some parameter value is empty. Usage: compose-up.sh <hadoop_version> <(The # of)slaves> <hdfs_path> <log_path>"
   exit 1
 fi
 
