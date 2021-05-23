@@ -18,5 +18,5 @@ ADD conf/hbase-site.xml $HBASE_HOME/conf
 RUN echo export JAVA_HOME=$(echo $JAVA_HOME) >> $HBASE_HOME/conf/hbase-env.sh
 RUN mkdir $HBASE_HOME/logs
 
-EXPOSE 16010 16030 60010 60030
+EXPOSE 16010 16030
 
