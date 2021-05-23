@@ -87,6 +87,7 @@ services:
       zookeeper-cluster:
         ipv4_address: 10.0.3.2
     extra_hosts:
+      - "zk-web:10.0.3.2"
 $ip_addr
 $zoo_service
 networks:
