@@ -7,7 +7,7 @@ log_path=$4
 
 if [ -z $log_path ]
 then
-  echo "Some parameter value is empty. Usage: compose-up.sh <hadoop_version> <(The # of)slaves> <hdfs_path> <log_path>"
+  echo "Some parameter value is empty. Usage: compose-up.sh <hadoop_version> <(The # of)slaves [integer]> <hdfs_path> <log_path>"
   exit 1
 fi
 
