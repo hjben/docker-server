@@ -22,4 +22,5 @@ fi
 echo "Done."
 sleep 2
 
+echo "Start Jupyter-lab service."
 docker exec -it $container_name bash -c "jupyter lab"
