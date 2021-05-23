@@ -22,7 +22,7 @@ ADD conf/server.properties $KAFKA_HOME/config/server.properties
 
 RUN mkdir /sh
 ADD sh/start-kafka.sh /sh/
-RUN chmod 755 start-kafka.sh
+RUN chmod 755 /sh/start-kafka.sh
 
 EXPOSE 9092-9099
 EXPOSE 9999
