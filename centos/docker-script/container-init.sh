@@ -28,4 +28,4 @@ fi
 echo "Done."
 sleep 2
 
-docker exec -it $container_name bash
+./container-exec.sh $container_name
