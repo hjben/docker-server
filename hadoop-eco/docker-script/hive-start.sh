@@ -2,12 +2,12 @@
 
 flag=$1
 
-echo "Start Hive service."
-
 if [ -z $flag ]
 then
   flag="none"
 fi
+
+echo "Start Hive service."
 
 if [ $flag = "meta" ] || [ $flag = "all" ] ; then
   echo "Initialize Hive MetaDB."
@@ -17,9 +17,9 @@ if [ $flag = "meta" ] || [ $flag = "all" ] ; then
   docker exec -it mariadb bash -c "mysql -u root -p < /sh/init-hive.sql"
   docker exec -it master bash -c "/usr/local/hive/bin/schematool -dbType mysql -initSchema"
   echo "Done."
+else
+  docker exec -it mariadb bash -c "/sh/start.sh"
 fi
-
-docker exec -it mariadb bash -c "/sh/start.sh"
 
 if [ $flag = "hdfs" ] || [ $flag = "all" ] ; then
   echo "Initialize HDFS for Hive."
