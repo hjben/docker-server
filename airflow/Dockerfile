@@ -1,7 +1,7 @@
 FROM hjben/centos-systemd:latest
 MAINTAINER hjben <hj.ben.kim@gmail.com>
 
-ENV AIRFLOW_VERSION 2.0.2
+ENV AIRFLOW_VERSION 2.1.0
 ENV AIRFLOW_HOME /usr/local/airflow
 ENV PYTHON_VERSION 3.8
 ENV PIP_VERSION 20.2.4
