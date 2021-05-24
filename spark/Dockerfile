@@ -21,8 +21,6 @@ RUN tar -xvzf spark-$SPARK_VERSION-bin-hadoop$SPARK_HADOOP_VERSION.tgz -C /usr/l
     rm -f spark-$SPARK_VERSION-bin-hadoop$SPARK_HADOOP_VERSION.tgz
 RUN ln -s /usr/local/spark-$SPARK_VERSION-bin-hadoop$SPARK_HADOOP_VERSION $SPARK_HOME
 
-ADD slaves $SPARK_HOME/conf/slaves
-
 RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
     cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
     chmod 0600 ~/.ssh/authorized_keys
