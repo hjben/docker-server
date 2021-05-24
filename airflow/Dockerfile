@@ -20,7 +20,7 @@ RUN pip install mysql-connector-python
 
 RUN airflow --help
 RUN mkdir $AIRFLOW_HOME/dags
-ADD airflow.cfg $AIRFLOW_HOME/
+ADD conf/airflow.cfg $AIRFLOW_HOME/
 
 EXPOSE 5555 8080 8793
 
