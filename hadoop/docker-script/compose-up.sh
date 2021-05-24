@@ -1,13 +1,14 @@
 #!/bin/bash
 
 hadoop_version=$1
-slaves=$2
-hdfs_path=$3
-log_path=$4
+jdk_version=$2
+slaves=$3
+hdfs_path=$4
+log_path=$5
 
 if [ -z $log_path ]
 then
-  echo "Some parameter value is empty. Usage: compose-up.sh <hadoop_version> <(The # of)slaves [integer]> <hdfs_path> <log_path>"
+  echo "Some parameter value is empty. Usage: compose-up.sh <hadoop_version> <jdk_version> <(The # of)slaves [integer]> <hdfs_path> <log_path>"
   exit 1
 fi
 
@@ -49,7 +50,7 @@ done
 for slave in $(seq 1 $slaves)
 do
   slave_service+='  'slave$slave':
-    image: hjben/hadoop:'$hadoop_version'
+    image: hjben/hadoop:'$hadoop_version'-jdk'$jdk_version'
     hostname: 'slave$slave'
     container_name: 'slave$slave'
     privileged: true
@@ -71,7 +72,7 @@ done
 cat << EOF > docker-compose.yml
 services:
   master:
-    image: hjben/hadoop:$hadoop_version
+    image: hjben/hadoop:$hadoop_version-jdk'$jdk_version'
     hostname: master
     container_name: master
     privileged: true
