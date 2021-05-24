@@ -5,7 +5,7 @@ flag=$2
 
 if [ -z $flag ]
 then
-  echo "Some parameter value is empty. Usage: zookeeper-start.sh <(The # of ensemble)servers [odd number]> <flag [ start | restart ]>"
+  echo "Some parameter value is empty. Usage: zookeeper-start.sh <(The # of ensemble) servers [odd number]> <flag [ start | restart ]>"
   exit 1
 fi
 
