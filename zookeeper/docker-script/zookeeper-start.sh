@@ -37,16 +37,13 @@ if [ $flag = "restart" ]
 then
   for server in $(seq 1 $servers)
   do
-    docker exec zoo$server /bin/bash -c "zkServer.sh restart"
+    docker exec zoo$server bash -c "zkServer.sh restart"
   done
 elif [ $flag = "start" ]
 then
   for server in $(seq 1 $servers)
   do
-    docker exec zoo$server /bin/bash -c "zkServer.sh start"
+    docker exec zoo$server bash -c "zkServer.sh start"
   done
 fi
 echo "Done."
-
-echo "Start Zookeeper web server."
-docker exec -it zk-web bash -c "cd zk-web && lein run"

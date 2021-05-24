@@ -113,10 +113,19 @@ echo "Done."
 echo "Initialize Zookeeper."
 for server in $(seq 1 $servers)
 do
-  docker exec zoo$server zkInit.sh
+  if [[ $server -eq 1 ]]
+  then
+    docker exec zoo$server zkInit.sh
+    sleep 1
+  else
+    docker exec zoo$server zkInit.sh zoo1
+    sleep 1
+  fi
+
+  docker exec zoo$server bash -c "zkServer.sh start"
 done
 
 docker exec zk-web /sh/set-user.sh
 echo "Done."
 
-./zookeeper-start.sh $servers start
+./zk-web-start.sh
