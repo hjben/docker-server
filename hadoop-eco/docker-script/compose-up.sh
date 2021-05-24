@@ -7,12 +7,13 @@ hadoop_log_path=$4
 hbase_log_path=$5
 hive_log_path=$6
 sqoop_log_path=$7
-maria_root_password=$8
-maria_data_path=$9
+maria_version=$8
+maria_root_password=$9
+maria_data_path=$10
 
 if [ -z $maria_data_path ]
 then
-  echo "Some parameter value is empty. Usage: container-init.sh <hadoop_version> <(The # of)slaves [integer]> <hdfs_path> <hadoop_log_path> <hbase_log_path> <hive_log_path> <sqoop_log_path> <mariaDB_root_password> <mariaDB_data_path>"
+  echo "Some parameter value is empty. Usage: container-init.sh <hadoop_version> <(The # of) slaves [integer]> <hdfs_path> <hadoop_log_path> <hbase_log_path> <hive_log_path> <sqoop_log_path> <mariaDB_version> <mariaDB_root_password> <mariaDB_data_path>"
   exit 1
 fi
 
