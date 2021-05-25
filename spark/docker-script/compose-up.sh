@@ -179,4 +179,5 @@ echo "Done."
 rm -f slaves
 
 ./spark-start.sh $workers $core $mem
+./livy-start.sh
 ./jupyter-start.sh

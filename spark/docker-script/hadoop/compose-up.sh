@@ -2,16 +2,15 @@
 
 hadoop_version=$1
 spark_version=$2
-jdk_version=$3
-slaves=$4
-jupyter_workspace_path=$5
-hdfs_path=$6
-hadoop_log_path=$7
-spark_log_path=$8
+slaves=$3
+jupyter_workspace_path=$4
+hdfs_path=$5
+hadoop_log_path=$6
+spark_log_path=$7
 
 if [ -z $spark_log_path ]
 then
-  echo "Some parameter value is empty. Usage: compose-up.sh <hadoop_version> <spark_version> <jdk_version> <(The # of)slaves [integer]> <jupyter_workspace_path> <hdfs_path> <hadoop_log_path> <spark_log_path>"
+  echo "Some parameter value is empty. Usage: compose-up.sh <hadoop_version> <spark_version> <(The # of)slaves [integer]> <jupyter_workspace_path> <hdfs_path> <hadoop_log_path> <spark_log_path>"
   exit 1
 fi
 
@@ -53,7 +52,7 @@ done
 for slave in $(seq 1 $slaves)
 do
   slave_service+='  'slave$slave':
-    image: hjben/hadoop:'$hadoop_version'-jdk'$jdk_version'
+    image: hjben/hadoop:'$hadoop_version'-jdk1.8.0
     hostname: 'slave$slave'
     container_name: 'slave$slave'
     privileged: true
@@ -77,7 +76,7 @@ done
 cat << EOF > docker-compose.yml
 services:
   jupyter-lab:
-    image: hjben/jupyter-lab:spark
+    image: hjben/jupyter-lab:spark-livy
     hostname: jupyter-lab
     container_name: jupyter-lab
     privileged: true
@@ -96,12 +95,13 @@ services:
       - "master:10.0.2.4"
 $ip_addr
   spark:
-    image: hjben/spark:$spark_version-jdk$jdk_version
+    image: hjben/spark:$spark_version-livy
     hostname: spark
     container_name: spark
     privileged: true
     ports:
       - 8080-8081:8080-8081
+      - 8998:8998
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup
       - $jupyter_workspace_path:/root/workspace
@@ -115,7 +115,7 @@ $ip_addr
       - "master:10.0.2.4"
 $ip_addr
   master:
-    image: hjben/hadoop:$hadoop_version-jdk$jdk_version
+    image: hjben/hadoop:$hadoop_version-jdk1.8.0
     hostname: master
     container_name: master
     privileged: true
@@ -162,4 +162,5 @@ done
 echo "Done."
 
 rm -f workers
+./livy-start.sh
 ./hadoop-start.sh start
