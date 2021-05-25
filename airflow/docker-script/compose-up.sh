@@ -6,13 +6,12 @@ dag_path=$3
 log_path=$4
 airflow_user=$5
 airflow_password=$6
-maria_version=$7
-maria_root_password=$8
-maria_data_path=$9
+maria_root_password=$7
+maria_data_path=$8
 
 if [ -z $maria_data_path ]
 then
-  echo "Some parameter value is empty. Usage: compose-up.sh <airflow_version> <(The # of) workers [integer]> <dag_path> <log_path> <airflow_user> <airflow_password> <mariaDB_version> <mariaDB_root_password> <mariaDB_data_path>"
+  echo "Some parameter value is empty. Usage: compose-up.sh <airflow_version> <(The # of) workers [integer]> <dag_path> <log_path> <airflow_user> <airflow_password> <mariaDB_root_password> <mariaDB_data_path>"
   exit 1
 fi
 
@@ -68,7 +67,7 @@ done
 cat << EOF > docker-compose.yml
 services:
   mariadb:
-    image: hjben/mariadb:$maria_version
+    image: hjben/mariadb:10.5
     hostname: mariadb
     container_name: mariadb
     privileged: true
