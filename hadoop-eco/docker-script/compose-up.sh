@@ -7,13 +7,12 @@ hadoop_log_path=$4
 hbase_log_path=$5
 hive_log_path=$6
 sqoop_log_path=$7
-maria_version=$8
-maria_root_password=$9
-maria_data_path=$10
+maria_root_password=$8
+maria_data_path=$9
 
 if [ -z $maria_data_path ]
 then
-  echo "Some parameter value is empty. Usage: container-init.sh <hadoop_version> <(The # of) slaves [integer]> <hdfs_path> <hadoop_log_path> <hbase_log_path> <hive_log_path> <sqoop_log_path> <mariaDB_version> <mariaDB_root_password> <mariaDB_data_path>"
+  echo "Some parameter value is empty. Usage: compose-up.sh <hadoop_version> <(The # of) slaves [integer]> <hdfs_path> <hadoop_log_path> <hbase_log_path> <hive_log_path> <sqoop_log_path> <mariaDB_root_password> <mariaDB_data_path>"
   exit 1
 fi
 
@@ -64,13 +63,13 @@ do
     container_name: 'slave$slave'
     privileged: true
     ports:
-      - 1603'$(($slave-1))':16030
+      - '$((16029 + $slave))':16030
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup
       - '$hbase_log_path'/slave'$slave':/usr/local/hbase/logs
     networks:
       hadoop-cluster:
-        ipv4_address: 10.0.2.'$(($slave+3))'
+        ipv4_address: 10.0.2.'$(($slave + 3))'
     extra_hosts:
       - "mariadb:10.0.2.2"
       - "master:10.0.2.3"
