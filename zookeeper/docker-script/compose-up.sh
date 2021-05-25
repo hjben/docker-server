@@ -10,7 +10,7 @@ log_path=$6
 
 if [ -z $log_path ]
 then
-  echo "Some parameter value is empty. Usage: compose-up.sh <zookeeper_version> <(The # of ensemble)servers [odd number]> <web_user> <web_password> <data_path> <log_path>"
+  echo "Some parameter value is empty. Usage: compose-up.sh <zookeeper_version> <(The # of ensemble) servers [odd number]> <web_user> <web_password> <data_path> <log_path>"
   exit 1
 fi
 
