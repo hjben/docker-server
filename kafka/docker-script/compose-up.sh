@@ -4,13 +4,14 @@ kafka_version=$1
 cmak_version=$2
 servers=$3
 zookeeper_connect=$4
-jupyter_workspace_path=$5
-data_path=$6
-log_path=$7
+external_ip=$5
+jupyter_workspace_path=$6
+data_path=$7
+log_path=$8
 
 if [ -z $log_path ]
 then
-  echo "Some parameter value is empty. Usage: compose-up.sh <kafka_version> <cmak_version> <(The # of) servers [integer]> <zookeeper_connect> <jupyter_workspace_path> <data_path> <log_path>"
+  echo "Some parameter value is empty. Usage: compose-up.sh <kafka_version> <cmak_version> <(The # of) servers [integer]> <zookeeper_connect> <external_ip> <jupyter_workspace_path> <data_path> <log_path>"
   exit 1
 fi
 
@@ -44,7 +45,7 @@ do
     ports:
       - '$((9092+($server)))':'$((9092+($server)))'
     environment:
-      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka'$server':9092,EXTERNAL://127.0.0.1:'$((9092+($server)))'
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka'$server':9092,EXTERNAL://'$external_ip':'$((9092+($server)))'
       KAFKA_LISTENERS: INTERNAL://:9092,EXTERNAL://:'$((9092+($server)))'
       KAFKA_ZOOKEEPER_CONNECT: '$zookeeper_connect'/kafka
       JMX_PORT: 9999
