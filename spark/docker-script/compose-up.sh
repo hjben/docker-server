@@ -29,12 +29,18 @@ if [[ ! $core =~ ^-?[0-9]+$ ]]
 then
   echo "CPU core for spark worker is not integer."
   exit 1
+elif [[ $core -lt 1 ]]
+then
+  core=1
 fi
 
 if [[ ! $mem =~ ^-?[0-9]+$ ]]
 then
   echo "Memory size for spark worker is not integer."
   exit 1
+elif [[ $mem -lt 1 ]]
+then
+  mem=1
 fi
 
 echo "Set docker-compose.yml file."
