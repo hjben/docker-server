@@ -1,6 +1,8 @@
 #!/bin/bash
 
 echo "Initialize MariaDB."
+/usr/bin/mysql_install_db --user=mysql
+
 systemctl enable mariadb
 /sh/start.sh
 
