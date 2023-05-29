@@ -53,9 +53,10 @@ do
     image: hjben/hadoop:'$hadoop_version'-jdk'$jdk_version'
     hostname: 'slave$slave'
     container_name: 'slave$slave'
+    cgroup: host
     privileged: true
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
     networks:
       hadoop-cluster:
         ipv4_address: 10.0.2.'$(($slave+2))'
@@ -75,13 +76,14 @@ services:
     image: hjben/hadoop:$hadoop_version-jdk'$jdk_version'
     hostname: master
     container_name: master
+    cgroup: host
     privileged: true
     ports:
       - 8088:8088
       - 9870:9870
       - 8042:8042
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
       - $hdfs_path:/data/hadoop
       - $log_path:/usr/local/hadoop/logs
     networks:
@@ -102,11 +104,11 @@ echo "Done."
 
 echo "Docker-compose container run."
 echo "Remove old containers."
-docker-compose down --remove-orphans
+docker compose down --remove-orphans
 sleep 1
 
 echo "Create new containers."
-docker-compose up -d
+docker compose up -d
 sleep 1
 
 docker cp ./workers master:/usr/local/hadoop/etc/hadoop/workers

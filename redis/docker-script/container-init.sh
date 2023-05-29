@@ -10,7 +10,7 @@ then
 fi
 
 echo "Create Redis container."
-(docker run --privileged --name $container_name -d -p 6379:6379 -v /sys/fs/cgroup:/sys/fs/cgroup hjben/redis:$image_version)
+(docker run --privileged --cgroupns=host --name $container_name -d -p 6379:6379 -v /sys/fs/cgroup:/sys/fs/cgroup:rw hjben/redis:$image_version)
 code=$?
 
 if [ $code -gt 0 ]

@@ -16,7 +16,7 @@ if [ $image_type != "systemd" ] && [ $image_type != "openjdk" ] ; then
 fi
 
 echo "Create CentOS container."
-(docker run --privileged --name $container_name -d -v /sys/fs/cgroup:/sys/fs/cgroup hjben/centos-$image_type:$image_version)
+(docker run --privileged --cgroupns=host --name $container_name -d -v /sys/fs/cgroup:/sys/fs/cgroup:rw hjben/centos-$image_type:$image_version)
 code=$?
 
 if [ $code -gt 0 ]

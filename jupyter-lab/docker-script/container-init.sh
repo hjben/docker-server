@@ -10,7 +10,7 @@ then
 fi
 
 echo "Create Jupyter-lab container."
-(docker run --privileged --name $container_name -d -p 8888:8888 -v /sys/fs/cgroup:/sys/fs/cgroup hjben/jupyter-lab:$image_version)
+(docker run --privileged --cgroupns=host --name $container_name -d -p 8888:8888 -v /sys/fs/cgroup:/sys/fs/cgroup:rw hjben/jupyter-lab:$image_version)
 code=$?
 
 if [ $code -gt 0 ]

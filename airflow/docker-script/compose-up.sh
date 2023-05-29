@@ -41,9 +41,10 @@ do
     image: hjben/airflow:'$airflow_version'
     hostname: 'worker$worker'
     container_name: 'worker$worker'
+    cgroup: host
     privileged: true
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
       - '$dag_path':/usr/local/airflow/dags
       - '$log_path'/worker'$worker':/usr/local/airflow/logs
     networks:
@@ -70,11 +71,12 @@ services:
     image: hjben/mariadb:10.5
     hostname: mariadb
     container_name: mariadb
+    cgroup: host
     privileged: true
     ports:
       - 3306:3306
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
       - $maria_data_path:/var/lib/mysql 
     environment:
       MARIADB_ROOT_PASSWORD: $maria_root_password
@@ -93,11 +95,12 @@ $ip_addr
     image: hjben/jupyter-lab:latest
     hostname: jupyter-lab
     container_name: jupyter-lab
+    cgroup: host
     privileged: true
     ports:
       - 8888:8888
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
       - $dag_path:/root/workspace
     networks:
       airflow-cluster:
@@ -114,11 +117,12 @@ $ip_addr
     image: hjben/redis:latest
     hostname: redis
     container_name: redis
+    cgroup: host
     privileged: true
     ports:
       - 6379:6379
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
     networks:
       airflow-cluster:
         ipv4_address: 10.0.2.4
@@ -134,11 +138,12 @@ $ip_addr
     image: hjben/airflow:$airflow_version
     hostname: webserver
     container_name: webserver
+    cgroup: host
     privileged: true
     ports:
       - 28080:8080
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
       - $log_path:/usr/local/airflow/logs
     networks:
       airflow-cluster:
@@ -155,9 +160,10 @@ $ip_addr
     image: hjben/airflow:$airflow_version
     hostname: scheduler
     container_name: scheduler
+    cgroup: host
     privileged: true
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
       - $log_path:/usr/local/airflow/logs
       - $dag_path:/usr/local/airflow/dags
     networks:
@@ -175,11 +181,12 @@ $ip_addr
     image: hjben/airflow:$airflow_version
     hostname: flower
     container_name: flower
+    cgroup: host
     privileged: true
     ports:
       - 5555:5555
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
     networks:
       airflow-cluster:
         ipv4_address: 10.0.2.7
@@ -203,11 +210,11 @@ echo "Done."
 
 echo "Docker-compose container run."
 echo "Remove old containers."
-docker-compose down --remove-orphans
+docker compose down --remove-orphans
 sleep 1
 
 echo "Create new containers."
-docker-compose up -d
+docker compose up -d
 sleep 1
 echo "Done."
 

@@ -12,7 +12,7 @@ then
 fi
 
 echo "Create MariaDB container."
-(docker run --privileged --name $container_name -d -p 3306:3306 -v $data_path:/var/lib/mysql -v /sys/fs/cgroup:/sys/fs/cgroup -e MARIADB_ROOT_PASSWORD=$root_password hjben/mariadb:$image_version)
+(docker run --privileged --cgroupns=host --name $container_name -d -p 3306:3306 -v $data_path:/var/lib/mysql -v /sys/fs/cgroup:/sys/fs/cgroup:rw -e MARIADB_ROOT_PASSWORD=$root_password hjben/mariadb:$image_version)
 code=$?
 
 if [ $code -gt 0 ]

@@ -47,13 +47,14 @@ do
     image: hjben/zookeeper:'$zookeeper_version'
     hostname: 'zoo$server'
     container_name: 'zoo$server'
+    cgroup: host
     privileged: true
     ports:
       - '$((2181+($server-1)))':2181
     environment:
       MYID: '$server'
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
       - '$log_path'/zoo'$server':/usr/local/zookeeper/logs
       - '$data_path'/zoo'$server':/data
     networks:
@@ -75,6 +76,7 @@ services:
     image: hjben/zk-web:latest
     hostname: zk-web
     container_name: zk-web
+    cgroup: host
     privileged: true
     ports:
       - 18080:8080
@@ -82,7 +84,7 @@ services:
       USER: $web_user
       PASS: $web_password
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
     networks:
       zookeeper-cluster:
         ipv4_address: 10.0.3.2
@@ -102,11 +104,11 @@ echo "Done."
 
 echo "Docker-compose container run."
 # echo "Remove old containers."
-# docker-compose down --remove-orphans
+# docker compose down --remove-orphans
 # sleep 1
 
 echo "Create new containers."
-docker-compose up -d
+docker compose up -d
 sleep 1
 echo "Done."
 

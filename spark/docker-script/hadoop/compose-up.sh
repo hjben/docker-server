@@ -55,9 +55,10 @@ do
     image: hjben/hadoop:'$hadoop_version'-jdk1.8.0
     hostname: 'slave$slave'
     container_name: 'slave$slave'
+    cgroup: host
     privileged: true
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
     networks:
       hadoop-cluster:
         ipv4_address: 10.0.2.'$(($slave+4))'
@@ -79,12 +80,13 @@ services:
     image: hjben/jupyter-lab:spark-livy
     hostname: jupyter-lab
     container_name: jupyter-lab
+    cgroup: host
     privileged: true
     ports:
       - 8888:8888
       - 4040-4044:4040-4044
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
       - $jupyter_workspace_path:/root/workspace
     networks:
       hadoop-cluster:
@@ -98,12 +100,13 @@ $ip_addr
     image: hjben/spark:$spark_version-livy
     hostname: spark
     container_name: spark
+    cgroup: host
     privileged: true
     ports:
       - 8080-8081:8080-8081
       - 8998:8998
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
       - $jupyter_workspace_path:/root/workspace
       - $spark_log_path/master:/usr/local/spark/logs 
     networks:
@@ -118,13 +121,14 @@ $ip_addr
     image: hjben/hadoop:$hadoop_version-jdk1.8.0
     hostname: master
     container_name: master
+    cgroup: host
     privileged: true
     ports:
       - 8088:8088
       - 9870:9870
       - 8042:8042
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
       - $hdfs_path:/data/hadoop
       - $hadoop_log_path:/usr/local/hadoop/logs
     networks:
@@ -147,11 +151,11 @@ echo "Done."
 
 echo "Docker-compose container run."
 echo "Remove old containers."
-docker-compose down --remove-orphans
+docker compose down --remove-orphans
 sleep 1
 
 echo "Create new containers."
-docker-compose up -d
+docker compose up -d
 sleep 1
 
 docker cp ./workers master:/usr/local/hadoop/etc/hadoop/workers
