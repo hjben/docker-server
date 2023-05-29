@@ -61,11 +61,12 @@ do
     image: hjben/hbase:1.6.0-hadoop'$hadoop_version'
     hostname: 'slave$slave'
     container_name: 'slave$slave'
+    cgroup: host
     privileged: true
     ports:
       - '$((16029 + $slave))':16030
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
       - '$hbase_log_path'/slave'$slave':/usr/local/hbase/logs
     networks:
       hadoop-cluster:
@@ -87,11 +88,12 @@ services:
     image: hjben/mariadb:10.5
     hostname: mariadb
     container_name: mariadb
+    cgroup: host
     privileged: true
     ports:
       - 3306:3306
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
       - $maria_data_path:/var/lib/mysql 
     environment:
       MARIADB_ROOT_PASSWORD: $maria_root_password
@@ -106,6 +108,7 @@ $ip_addr
     image: hjben/hadoop-eco:$hadoop_version
     hostname: master
     container_name: master
+    cgroup: host
     privileged: true
     ports:
       - 8088:8088
@@ -115,7 +118,7 @@ $ip_addr
       - 10002:10002
       - 16010:16010
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
       - $hdfs_path:/data/hadoop
       - $hadoop_log_path:/usr/local/hadoop/logs
       - $hbase_log_path/master:/usr/local/hbase/logs
@@ -144,7 +147,7 @@ echo "Docker-compose container run."
 # sleep 1
 
 echo "Create new containers."
-docker-compose up -d
+docker compose up -d
 sleep 1
 
 docker cp ./workers master:/usr/local/hadoop/etc/hadoop/workers
