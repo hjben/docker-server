@@ -5,7 +5,7 @@ ENV SPARK_HOME /usr/local/spark
 ENV SPARK_CLASSPATH $SPARK_HOME/jars
 ENV SPARK_VERSION 3.1.1
 ENV SPARK_HADOOP_VERSION 3.2
-ENV HADOOP_CONF_DIR $SPARK_HOME/hadoop-conf/
+ENV HADOOP_CONF_DIR $SPARK_HOME/hadoop-conf/hadoop/conf/
 ENV HADOOP_USER_NAME root
 ENV PATH $PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
@@ -24,6 +24,8 @@ RUN ln -s /usr/local/spark-$SPARK_VERSION-bin-hadoop$SPARK_HADOOP_VERSION $SPARK
 RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
     cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
     chmod 0600 ~/.ssh/authorized_keys
+
+ADD conf/spark-defaults.conf $SPARK_HOME/conf/
 
 RUN git clone https://github.com/hjben/hadoop.git
 RUN mv hadoop/ $HADOOP_CONF_DIR
