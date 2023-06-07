@@ -27,7 +27,7 @@ RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
 
 ADD conf/spark-defaults.conf $SPARK_HOME/conf/
 
-RUN git clone https://github.com/hjben/hadoop.git
+RUN git clone https://github.com/hjben/docker.git
 RUN mv hadoop/ $HADOOP_CONF_DIR
 
 EXPOSE 8080-8099
