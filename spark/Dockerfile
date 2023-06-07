@@ -28,7 +28,7 @@ RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
 ADD conf/spark-defaults.conf $SPARK_HOME/conf/
 
 RUN git clone https://github.com/hjben/docker.git
-RUN mv hadoop/ $HADOOP_CONF_DIR
+RUN mv docker/ $HADOOP_CONF_DIR
 
 EXPOSE 8080-8099
 EXPOSE 4040-4099
