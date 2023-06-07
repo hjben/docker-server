@@ -11,6 +11,6 @@ RUN pip install jupyterlab
 
 RUN jupyter lab --generate-config
 RUN mkdir /root/workspace
-ADD conf/jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
+ADD conf/jupyter_lab_config.py /root/.jupyter/jupyter_lab_config.py
 
 EXPOSE 8888
