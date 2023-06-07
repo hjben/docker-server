@@ -4,6 +4,10 @@ MAINTAINER hjben <hj.ben.kim@gmail.com>
 ENV container docker
 ENV TZ=Asia/Seoul
 
+RUN sed -i -e "s|mirrorlist=|#mirrorlist=|g" /etc/yum.repos.d/CentOS-*
+RUN sed -i -e "s|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g" /etc/yum.repos.d/CentOS-*
+
+
 RUN dnf -y update; dnf clean all
 RUN dnf -y install systemd; dnf clean all; \
 (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
