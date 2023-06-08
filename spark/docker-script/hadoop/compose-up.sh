@@ -57,6 +57,8 @@ do
     container_name: 'slave$slave'
     cgroup: host
     privileged: true
+    ports:
+      - '$slave'8042:8042
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
     networks:
