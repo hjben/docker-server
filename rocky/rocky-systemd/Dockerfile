@@ -5,7 +5,7 @@ ENV container docker
 ENV TZ=Asia/Seoul
 
 RUN dnf -y update; dnf clean all
-RUN [ ! -f /usr/sbin/init ] && dnf -y install systemd; def clean all
+RUN [ ! -f /usr/sbin/init ] && dnf -y install systemd; dnf clean all
 RUN ([ -d /lib/systemd/system/sysinit.target.wants ] && cd /lib/systemd/system/sysinit.target.wants/ && for i in *; do [ $i == \
 systemd-tmpfiles-setup.service ] || rm -f $i; done); \
 rm -f /lib/systemd/system/multi-user.target.wants/*;\
