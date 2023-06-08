@@ -77,7 +77,7 @@ done
 cat << EOF > docker-compose.yml
 services:
   jupyter-lab:
-    image: hjben/jupyter-lab:spark-livy
+    image: hjben/jupyter-lab:spark-$spark_version
     hostname: jupyter-lab
     container_name: jupyter-lab
     cgroup: host
