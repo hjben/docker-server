@@ -1,8 +1,8 @@
-FROM hjben/centos-openjdk:11
+FROM hjben/rockylinux-openjdk:11
 MAINTAINER hjben <hj.ben.kim@gmail.com>
 
 ENV HADOOP_HOME /usr/local/hadoop
-ENV HADOOP_VERSION 3.3.0
+ENV HADOOP_VERSION 3.3.5
 ENV PATH=$PATH:$HADOOP_HOME/bin
 
 RUN if [ ! -e /usr/bin/python ]; then ln -s /usr/bin/python2.7 /usr/bin/python; fi
@@ -43,4 +43,4 @@ ADD sh/*start-all.sh /sh/
 RUN chmod 755 /sh/*start-all.sh
 
 EXPOSE 9864 9866 9867 9868 9870  
-EXPOSE 8020 8042 8088 8888 9000 10020 19888
+EXPOSE 8020 8042 8050 8088 8888 9000 10020 19888
