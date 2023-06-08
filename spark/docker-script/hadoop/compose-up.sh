@@ -159,9 +159,12 @@ docker compose up -d
 sleep 1
 
 docker cp ./workers master:/usr/local/hadoop/etc/hadoop/workers
+docker exec -it master bash -c "rm -rf /run/nologin"
+
 for slave in $(seq 1 $slaves)
 do
   docker cp ./workers slave$slave:/usr/local/hadoop/etc/hadoop/workers
+  docker exec -it slave$slave bash -c "rm -rf /run/nologin"
 done
 echo "Done."
 
