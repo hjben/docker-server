@@ -73,7 +73,7 @@ done
 cat << EOF > docker-compose.yml
 services:
   master:
-    image: hjben/hadoop:$hadoop_version-jdk'$jdk_version'
+    image: hjben/hadoop:$hadoop_version-jdk$jdk_version
     hostname: master
     container_name: master
     cgroup: host
@@ -82,6 +82,7 @@ services:
       - 8088:8088
       - 9870:9870
       - 8042:8042
+      - 8050:8050
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
       - $hdfs_path:/data/hadoop
@@ -112,9 +113,12 @@ docker compose up -d
 sleep 1
 
 docker cp ./workers master:/usr/local/hadoop/etc/hadoop/workers
+docker exec -it master bash -c "rm -rf /run/nologin"
+
 for slave in $(seq 1 $slaves)
 do
   docker cp ./workers slave$slave:/usr/local/hadoop/etc/hadoop/workers
+  docker exec -it slave$slave bash -c "rm -rf /run/nologin"
 done
 echo "Done."
 
