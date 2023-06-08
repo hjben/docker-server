@@ -1,19 +1,20 @@
-FROM hjben/centos-openjdk:11
+FROM hjben/rockylinux-openjdk:11
 MAINTAINER hjben <hj.ben.kim@gmail.com>
 
 ENV SPARK_HOME /usr/local/spark
 ENV SPARK_CLASSPATH $SPARK_HOME/jars
-ENV SPARK_VERSION 3.1.1
-ENV SPARK_HADOOP_VERSION 3.2
+ENV SPARK_VERSION 3.4.0
+ENV SPARK_HADOOP_VERSION 3
 ENV HADOOP_CONF_DIR $SPARK_HOME/hadoop-conf/hadoop/conf/
 ENV HADOOP_USER_NAME root
 ENV PATH $PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
-RUN dnf install -y python38
+RUN dnf install -y python3.11
+RUN def install -y python3.11-pip
 RUN dnf install -y git
 
 WORKDIR /usr/bin
-RUN ln -s python3 python && ln -s pip3 pip
+RUN ln -s python3.11 python && ln -s pip3.11 pip
 
 WORKDIR /
 RUN wget https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop$SPARK_HADOOP_VERSION.tgz
