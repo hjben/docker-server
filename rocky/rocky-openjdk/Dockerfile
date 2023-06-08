@@ -1,4 +1,4 @@
-FROM rockylinux:9
+FROM hjben/rockylinux-systemd:latest
 MAINTAINER hjben <hj.ben.kim@gmail.com>
 
 ENV JAVA_VERSION 17
