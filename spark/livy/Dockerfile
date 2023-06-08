@@ -1,4 +1,4 @@
-FROM hjben/spark:3.4.0-jdk1.8.0
+FROM hjben/spark:3.1.1-jdk1.8.0
 MAINTAINER hjben <hj.ben.kim@gmail.com>
 
 ENV LIVY_VERSION 0.7.0
