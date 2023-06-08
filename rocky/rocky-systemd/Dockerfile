@@ -20,6 +20,7 @@ RUN dnf install -y openssh-server openssh-clients openssh-askpass
 RUN dnf install -y vim
 RUN dnf install -y net-tools
 RUN dnf install -y wget
+RUN dnf install -y procps
 
 VOLUME ["/sys/fs/cgroup"]
 CMD ["/usr/sbin/init"]
