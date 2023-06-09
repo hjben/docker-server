@@ -22,6 +22,7 @@ RUN dnf install -y net-tools
 RUN dnf install -y wget
 RUN dnf install -y procps
 RUN def install -y --allowerasing curl
+RUN dnf install -y unzip
 
 VOLUME ["/sys/fs/cgroup"]
 CMD ["/usr/sbin/init"]

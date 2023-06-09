@@ -5,7 +5,6 @@ ENV LIVY_VERSION 0.7.0
 ENV LIVY_HOME /usr/local/livy
 ENV PATH $PATH:$LIVY_HOME/bin
 
-RUN dnf install -y unzip
 RUN wget https://downloads.apache.org/incubator/livy/$LIVY_VERSION-incubating/apache-livy-$LIVY_VERSION-incubating-bin.zip
 RUN unzip apache-livy-$LIVY_VERSION-incubating-bin && \
     mv apache-livy-$LIVY_VERSION-incubating-bin /usr/local && \
