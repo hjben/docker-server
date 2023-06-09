@@ -21,6 +21,7 @@ RUN dnf install -y vim
 RUN dnf install -y net-tools
 RUN dnf install -y wget
 RUN dnf install -y procps
+RUN def install -y --allowerasing curl
 
 VOLUME ["/sys/fs/cgroup"]
 CMD ["/usr/sbin/init"]
