@@ -1,4 +1,4 @@
-FROM hjben/centos-systemd:latest
+FROM hjben/rockylinux-systemd:latest
 MAINTAINER hjben <hj.ben.kim@gmail.com>
 
 RUN curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash
