@@ -1,8 +1,8 @@
-FROM hjben/centos-openjdk:11
+FROM hjben/rockylinux-openjdk:11
 MAINTAINER hjben <hj.ben.kim@gmail.com>
 
 ENV ZOOKEEPER_HOME /usr/local/zookeeper
-ENV ZOOKEEPER_VERSION 3.6.2
+ENV ZOOKEEPER_VERSION 3.8.1
 ENV ZOOKEEPER_DATA_DIR /data
 ENV PATH $PATH:$ZOOKEEPER_HOME/bin
 
