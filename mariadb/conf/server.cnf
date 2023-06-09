@@ -10,7 +10,7 @@
 
 # this is only for the mysqld standalone daemon
 [mysqld]
-port = 3306
+port=3306
 character-set-server=utf8mb4
 collation-server=utf8mb4_unicode_ci
 bind-address=0.0.0.0
@@ -44,8 +44,8 @@ explicit_defaults_for_timestamp=1
 # you can put MariaDB-only options here
 [mariadb]
 
-# This group is only read by MariaDB-10.5 servers.
+# This group is only read by MariaDB-10.11 servers.
 # If you use the same .cnf file for MariaDB of different versions,
 # use this group for options that older servers don't understand
-[mariadb-10.5]
+[mariadb-10.11]
 
