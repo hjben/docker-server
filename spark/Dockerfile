@@ -10,7 +10,7 @@ ENV HADOOP_USER_NAME root
 ENV PATH $PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
 RUN dnf install -y python3.11
-RUN def install -y python3.11-pip
+RUN dnf install -y python3.11-pip
 RUN dnf install -y git
 
 WORKDIR /usr/bin
