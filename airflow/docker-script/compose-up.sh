@@ -219,6 +219,7 @@ sleep 1
 echo "Done."
 
 cat << EOF > init-airflow.sql
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '$maria_root_password';
 CREATE DATABASE airflow_db CHARACTER SET UTF8mb3 COLLATE utf8_general_ci;
 EOF
 
